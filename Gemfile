@@ -36,6 +36,7 @@ gem 'jbuilder', '~> 2.5'
 # Using omniauth foro authentication with Google strategy
 gem 'omniauth', '~> 1.8', '>= 1.8.1'
 gem 'omniauth-google-oauth2', '~> 0.5.3'
+gem 'dotenv-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
