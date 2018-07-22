@@ -1,6 +1,6 @@
 <h1>Ru-Shambo - <em>with friends!</em></h1>
 
 <%= "Welcome, #{@user.name}!" if session[:user_id]%>
-<img src="<%=@user.image if session[:user_id]%>"
+<img src="<%=@user.image if session[:user_id]%>">
 
 <a href="/auth/google_oauth2">Log in with Google</a>
