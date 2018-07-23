@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :matches
   root "welcome#home"
   
   resources :users, only: [:show, :edit, :update, :index, :destroy] #generated via Rails g
