@@ -1,6 +1,8 @@
 class User < ApplicationRecord
     has_many :matches, foreign_key: "challenger_id"
     has_many :opponents, through: :matches
+    has_many :games, through: :matches
+    has_many :recip_games, through: :matches
     validates :name, presence: true
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
     validates :email, uniqueness: true
