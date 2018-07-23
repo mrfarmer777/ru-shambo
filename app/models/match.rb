@@ -3,7 +3,9 @@ class Match < ApplicationRecord
     belongs_to :opponent, class_name: "User"
     #has_many :games      #soon....
     
+    #After each match is created, create its inverse automatically
     after_create :create_inverse, unless: :has_inverse?
+    #Destroy them both when one is destroyed.
     after_destroy :destroy_inverses, if: :has_inverse?
     
     #creates a second, inverse match for reciprocity with opponent
@@ -31,4 +33,5 @@ class Match < ApplicationRecord
     def inverse_match_options
         {challenger_id: opponent_id, opponent_id: challenger_id}
     end
+
 end

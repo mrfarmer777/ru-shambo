@@ -12,6 +12,14 @@ class UsersController < ApplicationController
         end
     end
     
+    def edit
+        if session[:user_id]==params[:id].to_i
+            @user=User.find(params[:id].to_i)
+        else
+            redirect_to user_path(User.find(session[:user_id]))
+        end
+    end
+    
     
     
 end

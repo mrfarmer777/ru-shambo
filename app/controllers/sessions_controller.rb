@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
         #using their app database id
         session[:user_id]=@user.id
         
-        render 'welcome/home'
+        redirect_to user_path(@user)
     end
         
     def destroy

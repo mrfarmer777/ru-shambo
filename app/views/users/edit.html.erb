@@ -1,0 +1,7 @@
+<h1>Editing Account for: <%=@user.name%></h1>
+
+<%=form_for :user, method: :patch, url: user_path(@user) do |f|%>
+    Name: <%=f.text_field :name%>
+    Image URL: <%=f.text_field :image%>
+    <%=f.submit%>
+<%end%>
