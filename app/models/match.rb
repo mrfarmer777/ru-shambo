@@ -50,4 +50,8 @@ class Match < ApplicationRecord
         "Match Details - #{self.id}: Challenger: #{self.challenger.name} vs. Opponent: #{self.opponent.name}"
     end
 
+    def opponent_name
+        self.opponent.name
+    end
+    
 end

@@ -1,0 +1,9 @@
+<h1>Create a New Game!</h1>
+
+<%=form_for :game, url: games_path, method: :post do |f|%>
+    <p>Whom would you like to challenge?</p><br>
+    <%=collection_select :game, :match_id, @user.matches, "id", "opponent_name" %><br>
+    <p>What is your throw (your opponent won't see it until its too late!!!</p><br>
+    <%=select :game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])%><br>
+    <%=f.submit "Start Game!"%>
+<%end%>
