@@ -3,7 +3,10 @@ class Game < ApplicationRecord
     
     after_create :create_inverse, unless: :has_inverse?
     after_destroy :destroy_inverse, if: :has_inverse?
+    after_update :update_inverse, unless: :updated?
     
+    
+    #Game reciprocity helpers
     def create_inverse
         recip_game=self.class.new(inverse_game_options)
         recip_game.match_id=(self.match.inverses.first.id)
@@ -27,8 +30,53 @@ class Game < ApplicationRecord
         self.inverse.destroy
     end
     
+    def update_inverse
+        inv=self.inverse
+        inv.update(chal_throw:self.opp_throw, opp_throw: self.chal_throw)
+    end
+    
+    def updated?
+        inv=self.inverse
+        (self.chal_throw==inv.opp_throw && self.opp_throw==inv.chal_throw && self.recip_game_id==inv.id && self.id==inv.recip_game_id)
+    end
+    
     
     def inverse_game_options
         {chal_throw: opp_throw, opp_throw: chal_throw}
     end
+    
+    #Game Logic Helpers
+    
+    def complete?
+        opp_throw.present? && chal_throw.present?
+    end
+    
+    def draw?
+        self.complete? && opp_throw==chal_throw
+    end
+    
+    def beat_throw(throw)
+        if(throw=="r")
+            "p"
+        elsif(throw=="p")
+            "s"
+        elsif(throw=="s")
+            "r"
+        else
+            "invalid move"
+        end
+    end
+    
+    def winner
+        if chal_throw==beat_throw(opp_throw)
+            self.match.challenger
+        elsif opp_throw==beat_throw(chal_throw)
+            self.match.opponent
+        else
+            nil
+        end
+    end
+            
+            
+    
 end
