@@ -67,13 +67,15 @@ class Game < ApplicationRecord
         end
     end
     
-    def winner
+    def result
         if chal_throw==beat_throw(opp_throw)
-            self.match.challenger
+            "Won by: #{self.match.challenger.name}"
         elsif opp_throw==beat_throw(chal_throw)
-            self.match.opponent
+             "Won by: #{self.match.opponent.name}"
+        elsif draw?
+            "Draw"
         else
-            nil
+            "In-progress"
         end
     end
     
@@ -82,10 +84,10 @@ class Game < ApplicationRecord
             "Your Throw"
         elsif opp_throw.nil?
             "Waiting for Opponent"
-        elsif draw?
-            "Draw"
         elsif complete?
-            "Won"
+            "Completed"
+        else
+            "Game Error"
         end
     end
             

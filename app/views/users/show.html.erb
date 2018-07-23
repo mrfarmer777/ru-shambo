@@ -10,12 +10,14 @@
         <th>Opponent</th>
         <th>Started</th>
         <th>Status</th>
+        <th>Result</th>
     </tr>
     <% @games.each do |g|%>
         <tr>
             <td><%=g.match.opponent.name%> </td>
             <td><%=g.updated_at%></td>
             <td><%=g.status%></td>
+            <td><%=g.result%></td>
         </tr>
     <%end%>
 </table>
