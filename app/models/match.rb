@@ -1,8 +1,18 @@
 class Match < ApplicationRecord
+    #basic relationships
     belongs_to :challenger, foreign_key: "challenger_id", class_name: "User" 
     belongs_to :opponent, class_name: "User"
     #has_many :games      #soon....
     
+    #basic match validations
+    validates :challenger_id, :opponent_id, presence: true
+    validates_associated :challenger
+    validates_associated :opponent
+    
+    #Ensure a single one-way match can exist between each any 2 users (reciprication ok)
+    validates :opponent_id, uniqueness: {scope: :challenger_id}
+    
+    #Handling automatic reciprocity for matches
     #After each match is created, create its inverse automatically
     after_create :create_inverse, unless: :has_inverse?
     #Destroy them both when one is destroyed.
@@ -33,6 +43,11 @@ class Match < ApplicationRecord
     #returns reversed params for an inverse match
     def inverse_match_options
         {challenger_id: opponent_id, opponent_id: challenger_id}
+    end
+    
+    #Returns human-readable description for debugging and possibly other things.
+    def description
+        "Match Details - #{self.id}: Challenger: #{self.challenger.name} vs. Opponent: #{self.opponent.name}"
     end
 
 end

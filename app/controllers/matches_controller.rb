@@ -1,4 +1,5 @@
 class MatchesController < ApplicationController
+
     
     #show the details of a single match
     def show
