@@ -10,10 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_22_221023) do
+ActiveRecord::Schema.define(version: 2018_07_23_030719) do
 
   create_table "matches", force: :cascade do |t|
-    t.integer "user_id"
+    t.integer "challenger_id"
     t.integer "opponent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

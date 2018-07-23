@@ -1,4 +1,4 @@
 class User < ApplicationRecord
-    has_many :matches
-    has_many :opponents, through: :matches, class_name: "User"
+    has_many :matches, foreign_key: "challenger_id"
+    has_many :opponents, through: :matches
 end
