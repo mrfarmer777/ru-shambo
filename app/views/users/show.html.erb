@@ -7,16 +7,17 @@
 <h3>Active Games: </h3>
 <table>
     <tr>
-        <td>
-            <th>Opponent</th>
-        </td>
-        <td>
-            <th>Started</th>
-        </td>
-        <td>
-            <th>Status</th>
-        </td>
+        <th>Opponent</th>
+        <th>Started</th>
+        <th>Status</th>
     </tr>
+    <% @games.each do |g|%>
+        <tr>
+            <td><%=g.match.opponent.name%> </td>
+            <td><%=g.updated_at%></td>
+            <td><%=g.status%></td>
+        </tr>
+    <%end%>
 </table>
 
 <h3>My Stats:</h3>
