@@ -1,0 +1,8 @@
+<h1>Ru-Sham-bo-ers</h1>
+<h2>Leaderboard</h2>
+
+<ol>
+    <% @users.each do |u|%>
+        <li><%=link_to u.name, user_path(u)%> (<%=u.matches.count%> Active Matches)</li>
+    <%end%>
+</ol>
