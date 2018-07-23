@@ -1,0 +1,9 @@
+<h1>Create a new match...</h1>
+<p>Who would you like to challenge?</p>
+<% if flash[:message]%>
+    <p class="flash_message"><%=flash[:message]%></p>
+<%end%>
+<%=form_for :match, url: matches_path do |f|%>
+    <%=collection_select(:match, :opponent_id, User.all, :id, :name)%>
+    <%=f.submit%>
+<%end%>

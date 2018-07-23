@@ -11,14 +11,25 @@ class MatchesController < ApplicationController
     end
     
     def create
-        @match=Match.new(match_params)
-        @match.save
-        redirect_to match_path(@match)
+        @user=User.find(session[:user_id])
+        if @user.id==match_params[:opponent_id].to_i
+            flash[:message]="Sorry, you can't (umm..) challenge yourself."
+            render "matches/new"
+        else
+            if Match.exists?(challenger_id: @user.id, opponent_id: match_params[:opponent_id])
+                flash[:message]="Match already exists. Try making a new game for this match."
+                render "new"
+            else
+                @match=Match.new(challenger_id: @user.id, opponent_id: match_params[:opponent_id])
+                @match.save
+                redirect_to match_path(@match)
+            end
+        end
     end
         
         
         
-    end
+    
     
     private
     
