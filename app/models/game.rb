@@ -76,6 +76,20 @@ class Game < ApplicationRecord
             nil
         end
     end
+    
+    def status
+        if chal_throw.nil?
+            "Your Throw"
+        elsif opp_throw.nil?
+            "Waiting for Opponent"
+        elsif draw?
+            "Draw"
+        elsif complete?
+            "Won"
+        end
+    end
+            
+        
             
             
     
