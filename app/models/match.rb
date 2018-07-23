@@ -2,9 +2,8 @@ class Match < ApplicationRecord
     #basic relationships
     belongs_to :challenger, foreign_key: "challenger_id", class_name: "User" 
     belongs_to :opponent, class_name: "User"
-    has_many :games, class_name: "Game", foreign_key: "match_1_id"
-    has_many :recip_games, class_name: "Game", foreign_key: "match_2_id"
-    
+    has_many :games
+
     #basic match validations
     validates :challenger_id, :opponent_id, presence: true
     validates_associated :challenger
