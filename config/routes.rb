@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   
-  resources :matches
+  
   root "welcome#home"
   
+
   resources :users, only: [:show, :index, :destroy] #generated via Rails g
+  resources :matches, only: [:new, :create, :show, :destroy]
+
   
   get '/auth/google_oauth2/callback' => 'sessions#create'
   

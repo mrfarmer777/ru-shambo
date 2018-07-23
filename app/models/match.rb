@@ -18,6 +18,7 @@ class Match < ApplicationRecord
         self.class.exists?(inverse_match_options)
     end
     
+    
     #destroys all inverses when a instance is destroyed
     def destroy_inverses
         inverses.destroy_all

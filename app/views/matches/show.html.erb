@@ -1,0 +1,6 @@
+<h1><%=link_to @challenger.name, user_path(@challenger)%> vs. <%=link_to @opponent.name, user_path(@opponent)%></h1>
+<p>Total Games: ###</p>
+
+<%=form_tag match_path(@match), method: "delete" do%>
+    <%= submit_tag "Delete this Match"%>
+<%end%>
