@@ -1,0 +1,19 @@
+<h1>Let's Play...</h1>
+
+
+<table>
+    <tr>
+        <td><%=@game.match.challenger_name%></td>
+        <td>vs.</td>
+        <td><%=@game.match.opponent_name%></td>
+    </tr>
+    <tr>
+        <td><%=@game.status=="Your Throw" ? select(:game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])) : @game.chal_throw%></td>
+        <td></td>
+        <td><%=@game.status=="Complete" ? @game.opp_throw : "?" %></td>
+    </tr>
+    <tr>
+        <td>Game Number: <%=@match.game_count%></td>
+    </tr>
+    
+</table>

@@ -12,6 +12,13 @@ class GamesController < ApplicationController
        @match.save #? Necessary?
        redirect_to user_path(session[:user_id])
     end
+    
+    def show
+        @game=Game.find(params[:id].to_i)
+        @match=@game.match
+        @user=User.find(session[:user_id])
+    end
+    
        
        
     

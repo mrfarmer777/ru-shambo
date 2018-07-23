@@ -54,4 +54,12 @@ class Match < ApplicationRecord
         self.opponent.name
     end
     
+    def challenger_name
+        self.challenger.name
+    end
+    
+    def game_count
+        self.games.count
+    end
+    
 end
