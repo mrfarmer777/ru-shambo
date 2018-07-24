@@ -14,7 +14,12 @@
  *= require_self
  */
  
+ body{
+  margin:65px;
+ }
+ 
  h2 {
-     color: red;
+  color:red;
+
  }
  

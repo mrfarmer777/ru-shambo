@@ -25,9 +25,10 @@
 <%=link_to "View My Matches", user_matches_path(@user)%>
 
 <h3>My Stats:</h3>
-<p><b>Record (All-time): </b>54-42-23 (### Total Games)</p>
-<p><b>Current Streak: </b>+3</p>
-<p><b>Longest Streak: </b>+8</p>
-<p><b>Favorite Throw:</b>Rock (46% of throws)</p>
+<p><b>Record (All-time): </b><%=@user.record%></p>
+<p><b>Win Percentage: </b><%=@user.win_percentage%></p>
+<p><b>Favorite Opponent: </b><%=@user.favorite_opponent%></p>
+<p><b>Overall Rank: </b><%=@user.points_rank%></p>
+<p><b>Favorite Throw: </b><%=@user.favorite_throw%></p>
 
 

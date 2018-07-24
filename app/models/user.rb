@@ -10,6 +10,7 @@ class User < ApplicationRecord
     validates :uid, uniqueness: true
     
     
+    #////////////STATS HELPERS/////////////////////
     def wins
         self.games.count{|g| g.result.include?("Congratulations")}
     end
@@ -31,13 +32,37 @@ class User < ApplicationRecord
     end
     
     def favorite_throw
+        throw_to_string={"r"=>"rock","p"=>"paper","s"=>"scissors"}
         throws=["r","p","s"]
         throw_arr=throws.collect{|t| self.games.count{|g| g.chal_throw==t}}
-        throws[throw_arr.each_with_index.max[1]]
+        throw_to_string[throws[throw_arr.each_with_index.max[1]]]
     end
     
     def favorite_opponent
         match=self.matches.max_by{|m| m.game_count}
         match.opponent_name
     end
+    
+    def points
+        (self.wins*2)+(self.draws*1)-(self.losses*1)
+    end
+    
+    def win_p_rank
+        User.rank_by_win_percentage.index(self)+1
+    end
+    
+    def points_rank
+        User.rank_by_points.index(self)+1
+    end
+    
+    #////////////RANKING HELPERS (OBJECT SCOPE)/////////////////////
+    def self.rank_by_win_percentage
+        User.all.sort_by{|u| u.win_percentage}
+    end
+    
+    def self.rank_by_points
+        User.all.sort_by{|u| u.points}
+    end
+    
+
 end
