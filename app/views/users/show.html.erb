@@ -2,14 +2,22 @@
 
 
 <%= link_to "Log Out", logout_path%>
-<%= link_to "Create New Match", new_match_path%>
 <%= link_to "Create New Game", new_game_path%>
 
-<h3>Make a New Game!</h3>
-<%=form_for :game, url: user_games_path(@user) do |f|%>
-    <%=collection_select :game, :match_id, @user.matches, "id", "opponent_name", prompt:true%>
-    <%=select :game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]]), {include_blank: "Select a throw!"}%>
-    <%=f.submit "Start Game!"%>
+<h3>Challenge a New Opponent</h3>
+<% if @match.errors.any? %>
+<div class="error_explanation">
+    <p><%=pluralize(@match.errors.count, "error")%> prohibited this match from being created: </p>
+    <ul>
+        <% @match.errors.full_messages.each do |msg|%>
+            <li><%=msg%></li>
+        <%end%>
+    </ul>
+</div>
+<%end%>
+<%=form_for @match, url: user_matches_path(@user) do |f|%>
+    <%=collection_select :match, :opponent_id, User.all.select {|u| u.id!=@user.id && !@user.opponents.include?(u)}, "id", "name", prompt:true%>
+    <%=f.submit "Challenge Opponent!"%>
 <%end%>
 
 <h3>My Matches: </h3>

@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   
 
   resources :users, only: [:show, :index, :destroy] do
-    resources :matches, only: [:show, :index]
+    resources :matches, only: [:create, :show, :index, :destroy]
     resources :games, only: [:create,:show]
   end
   
-  resources :matches, only: [:new, :create, :show, :destroy]
+  resources :matches, only: [:show, :destroy]
   resources :games, only: [:new, :create, :show, :update]
 
   

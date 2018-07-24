@@ -10,7 +10,7 @@
             <td><%=m.opponent_name%> </td>
             <td><%=m.updated_at%></td>
             <td><%=m.game_count%></td>
-            <td><%=link_to "View", match_path(m)%></td>
+            <td><%=link_to "View", user_match_path(@user,m)%></td>
             </a>
         </tr>
     <%end%>
