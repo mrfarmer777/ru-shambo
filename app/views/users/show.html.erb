@@ -5,6 +5,13 @@
 <%= link_to "Create New Match", new_match_path%>
 <%= link_to "Create New Game", new_game_path%>
 
+<h3>Make a New Game!</h3>
+<%=form_for :game, url: user_games_path(@user) do |f|%>
+    <%=collection_select :game, :match_id, @user.matches, "id", "opponent_name", prompt:true%>
+    <%=select :game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]]), {include_blank: "Select a throw!"}%>
+    <%=f.submit "Start Game!"%>
+<%end%>
+
 <h3>Active Games: </h3>
 <table>
     <tr>
@@ -22,6 +29,8 @@
         </tr>
     <%end%>
 </table>
+
+<%=link_to "View My Matches", user_matches_path(@user)%>
 
 <h3>My Stats:</h3>
 <p><b>Record (All-time): </b>54-42-23 (### Total Games)</p>
