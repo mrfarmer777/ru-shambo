@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_23_191708) do
+ActiveRecord::Schema.define(version: 2018_07_23_165637) do
 
   create_table "games", force: :cascade do |t|
     t.string "chal_throw"
     t.string "opp_throw"
+    t.string "status", default: "in-progress"
     t.integer "match_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

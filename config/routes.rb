@@ -5,7 +5,11 @@ Rails.application.routes.draw do
   root "welcome#home"
   
 
-  resources :users, only: [:show, :index, :destroy] #generated via Rails g
+  resources :users, only: [:show, :index, :destroy] do
+    resources :matches, only: [:show, :index]
+    resources :games, only: [:create,:show]
+  end
+  
   resources :matches, only: [:new, :create, :show, :destroy]
   resources :games, only: [:new, :create, :show, :update]
 

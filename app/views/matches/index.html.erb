@@ -1,0 +1,19 @@
+<h1><%=@user.name%>'s Matches</h1>
+<%= link_to "Back to User Screen", user_path(@user)%>
+
+<table>
+    <tr>
+        <th>Opponent</th>
+        <th>Match Start</th>
+        <th>Game Count</th>
+        <th>Match Record (All-Time)</th>
+    </tr>
+    <% @matches.each do |m|%>
+        <tr>
+            <td><%=m.opponent_name%></td>
+            <td><%=m.created_at%></td>
+            <td><%=m.game_count%></td>
+            <td>4-5-3 (W-L-D)</td>
+        </tr>
+    <%end%>
+</table>

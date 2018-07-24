@@ -8,6 +8,13 @@ class MatchesController < ApplicationController
         @opponent=@match.opponent
     end
     
+    #index the matches (for a user) 
+    #Nested route: /users/:uesr_id/matches/:id
+    def index
+        @user=User.find(params[:user_id])
+        @matches=@user.matches
+    end
+    
     #renders the new match form
     def new
         @challenger=User.find(session[:user_id])
