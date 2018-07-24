@@ -19,6 +19,12 @@ class GamesController < ApplicationController
         @user=User.find(session[:user_id])
     end
     
+    def update
+        @game=Game.find(params[:id])
+        @game.update(chal_throw:game_params[:chal_throw])
+        redirect_to game_path(@game)
+    end
+    
        
        
     

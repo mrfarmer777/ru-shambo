@@ -1,0 +1,17 @@
+<table>
+    <tr>
+        <th>Opponent</th>
+        <th>Started</th>
+        <th>Total Games</th>
+        <th>Actions</th>
+    </tr>
+    <% matches.each do |m|%>
+        <tr><a href="<%=match_path(m)%>">
+            <td><%=m.opponent_name%> </td>
+            <td><%=m.updated_at%></td>
+            <td><%=m.game_count%></td>
+            <td><%=link_to "View", match_path(m)%></td>
+            </a>
+        </tr>
+    <%end%>
+</table>

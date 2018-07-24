@@ -69,9 +69,9 @@ class Game < ApplicationRecord
     
     def result
         if chal_throw==beat_throw(opp_throw)
-            "Won by: #{self.match.challenger.name}"
+            "Congratulations! Won by: #{self.match.challenger.name}"
         elsif opp_throw==beat_throw(chal_throw)
-             "Won by: #{self.match.opponent.name}"
+             "Sorry. Won by: #{self.match.opponent.name}"
         elsif draw?
             "Draw"
         else
@@ -89,6 +89,10 @@ class Game < ApplicationRecord
         else
             "Game Error"
         end
+    end
+    
+    def opponent_name
+        self.match.opponent_name
     end
             
         

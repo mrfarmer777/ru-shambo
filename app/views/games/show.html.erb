@@ -9,12 +9,25 @@
         <td><%=@game.match.opponent_name%></td>
     </tr>
     <tr>
-        <td><%=@game.status=="Your Throw" ? select(:game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])) : @game.chal_throw%></td>
+        <% if @game.status=="Your Throw"%>
+        <td>
+            <%=form_for(:game, url: game_path(@game), method: :patch) do |f|%>
+            <%=select(:game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])) %>
+            <%=f.submit "Play this Throw"%>
+            </td>
+            <%end%>
+        </td>
+        
+        <%else%>
+            <td><%=@game.chal_throw%></td>
+        <%end%>
         <td></td>
-        <td><%=@game.status=="Complete" ? @game.opp_throw : "?" %></td>
+        <td><%=@game.status=="Completed" ? @game.opp_throw : "?" %></td>
     </tr>
     <tr>
         <td>Game Number: <%=@match.game_count%></td>
     </tr>
+    
+    <h3><%=@game.result if @game.status=="Completed"%></h3>
     
 </table>

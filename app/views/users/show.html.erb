@@ -12,24 +12,8 @@
     <%=f.submit "Start Game!"%>
 <%end%>
 
-<h3>Active Games: </h3>
-<table>
-    <tr>
-        <th>Opponent</th>
-        <th>Started</th>
-        <th>Status</th>
-        <th>Result</th>
-    </tr>
-    <% @games.each do |g|%>
-        <tr>
-            <td><%=g.match.opponent.name%> </td>
-            <td><%=g.updated_at%></td>
-            <td><%=g.status%></td>
-            <td><%=g.result%></td>
-        </tr>
-    <%end%>
-</table>
-
+<h3>My Matches: </h3>
+<%= render partial: "user_matches", locals:{matches: @user.matches}%>
 <%=link_to "View My Matches", user_matches_path(@user)%>
 
 <h3>My Stats:</h3>
