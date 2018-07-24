@@ -1,11 +1,24 @@
 <h1><%=link_to @challenger.name, user_path(@challenger)%> vs. <%=link_to @opponent.name, user_path(@opponent)%></h1>
 <p>Total Games: <%=@match.game_count%></p>
 
-<ol>
-<% @games.each do |g|%>
-    <li><%=g.opponent_name%> | <%=g.created_at%> | <%=g.status%> | <%=link_to "Play Game", game_path(g)  if g.status=="Your Throw"%></li>
+<table>
+    <tr>
+        <th>Opponent</th>
+        <th>Game Start</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <% @games.each do |g|%>
+    <tr> 
+        <td><%=g.opponent_name%></td>
+        <td><%=g.created_at%></td>
+        <td><%=g.status%></td>
+        <td><%=g.status=="Your Throw" ? link_to("Play Game", game_path(g)) : g.result %></td>
+    </tr>
 <%end%>
-</ol>
+</table>
+
+
 
 
 <%=form_tag match_path(@match), method: "delete" do%>
