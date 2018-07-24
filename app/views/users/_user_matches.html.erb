@@ -11,6 +11,13 @@
             <td><%=m.updated_at%></td>
             <td><%=m.game_count%></td>
             <td><%=link_to "View", user_match_path(@user,m)%></td>
+            <td>
+                <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
+                    <%=hidden_field(:game, :match_id,{value: m.id})%>
+                    <%=select(:game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])) %>
+                    <%=f.submit "New Game with Throw"%>
+                <%end%>
+            </td>
             </a>
         </tr>
     <%end%>

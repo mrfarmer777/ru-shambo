@@ -16,12 +16,12 @@
 </div>
 <%end%>
 <%=form_for @match, url: user_matches_path(@user) do |f|%>
-    <%=collection_select :match, :opponent_id, User.all.select {|u| u.id!=@user.id && !@user.opponents.include?(u)}, "id", "name", prompt:true%>
+    <%=collection_select :match, :opponent_id, User.all.select {|u|  u.id!=@user.id }, "id", "name", prompt:true%>
     <%=f.submit "Challenge Opponent!"%>
 <%end%>
 
 <h3>My Matches: </h3>
-<%= render partial: "user_matches", locals:{matches: @user.matches}%>
+<%= render partial: "users/user_matches", locals:{matches: @user.matches}%>
 <%=link_to "View My Matches", user_matches_path(@user)%>
 
 <h3>My Stats:</h3>
