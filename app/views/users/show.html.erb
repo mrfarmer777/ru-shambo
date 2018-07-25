@@ -1,4 +1,4 @@
-<div class="med-grey">
+<div class="med-grey top-panel">
     <h2><%=@user.name%></h2>
     <p>Ru-Rank: <%=@user.points_rank%> | Throw Master</p>
     <div class="circle-group row">
@@ -35,7 +35,7 @@
 
 
 <div class="row">
-    <div class="col-md-12 med-grey">
+    <div class="col-md-12 med-grey panel panel-left">
         <h3>My Matches: </h3>
         <%= render partial: "users/user_matches", locals:{matches: @user.matches}%>
         <%=link_to "View My Matches", user_matches_path(@user)%>
@@ -43,30 +43,24 @@
 </div>
 
 <div class="row">
-    <div class="col-md-12 med-grey">
+    <div class="col-md-12 med-grey panel panel-left">
         <h3>My Stats:</h3>
-        <%if @user.games.count>0%>
-            <p><b>Record (All-time): </b><%=@user.record%></p>
-            <p><b>Win Percentage: </b><%=@user.win_percentage%></p>
-            <p><b>Favorite Opponent: </b><%=@user.favorite_opponent%></p>
-            <p><b>Overall Rank: </b><%=@user.points_rank%></p>
-            <p><b>Favorite Throw: </b><%=@user.favorite_throw%></p>
-        <%else%>
-            <p>No games played yet!</p>
-        <%end%>
+        <div>
+            <%if @user.games.count>0%>
+                <p><b>Record (All-time): </b><%=@user.record%></p>
+                <p><b>Win Percentage: </b><%=@user.win_percentage%></p>
+                <p><b>Favorite Opponent: </b><%=@user.favorite_opponent%></p>
+                <p><b>Overall Rank: </b><%=@user.points_rank%></p>
+                <p><b>Favorite Throw: </b><%=@user.favorite_throw%></p>
+            <%else%>
+                <p>No games played yet!</p>
+            <%end%>
+        </div>
+        
     </div>
 </div>
 
 
-<h3>My Stats:</h3>
-<%if @user.games.count>0%>
-    <p><b>Record (All-time): </b><%=@user.record%></p>
-    <p><b>Win Percentage: </b><%=@user.win_percentage%></p>
-    <p><b>Favorite Opponent: </b><%=@user.favorite_opponent%></p>
-    <p><b>Overall Rank: </b><%=@user.points_rank%></p>
-    <p><b>Favorite Throw: </b><%=@user.favorite_throw%></p>
-<%else%>
-    <p>No games played yet!</p>
-<%end%>
+
 
 
