@@ -36,7 +36,7 @@ class User < ApplicationRecord
         else
             #make a new user using their email, set a randomized password (so no one else can hack in through the local login method?)
             #Want to make new users with more than email in the future...
-            user.User.create(:email=>oauth_email, password: SecureRandom.hex)
+            user=User.new(:email=>oauth_email, :name => oauth_name, :uid => oauth_uid, :image => oauth_image, password: SecureRandom.hex)
             
             if user.save
                 session[:user_id] = user.id
@@ -107,11 +107,11 @@ class User < ApplicationRecord
     
     #////////////RANKING HELPERS (OBJECT SCOPE)/////////////////////
     def self.rank_by_win_percentage
-        User.all.sort_by{|u| u.win_percentage}
+        User.all.sort_by{|u| u.win_percentage }.reverse!
     end
     
     def self.rank_by_points
-        User.all.sort_by{|u| u.points}
+        User.all.sort_by{|u| u.points}.reverse!
     end
     
 
