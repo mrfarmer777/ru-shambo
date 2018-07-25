@@ -95,6 +95,10 @@ class Game < ApplicationRecord
         self.match.opponent_name
     end
     
+    def self.match_games(match_id)
+        where(match_id: match_id)
+    end
+    
     def self.match_active_games(match_id)
         where(match_id: match_id).select{|g| g.status=="Your Throw"}
     end

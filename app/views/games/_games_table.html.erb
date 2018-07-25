@@ -1,0 +1,39 @@
+<table class="table table-bordered">
+    <tr>
+        <th>Opponent</th>
+        <th>Game Start</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <% games.each do |g|%>
+    <tr> 
+        <td><%=g.opponent_name%></td>
+        <td><%=g.created_at%></td>
+        <td><%=g.status%></td>
+        <%if g.status=="Your Move"%>
+            <td class="circle-group">
+                <div>
+                    <%=form_for :game, url: game_path(g), method: :patch do |f|%>
+                        <%=hidden_field(:game, :chal_throw, {value: "r"})%>
+                        <%=f.submit "R", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+                <div>
+                    <%=form_for :game, url: game_path(g), method: :patch do |f|%>
+                        <%=hidden_field(:game, :chal_throw, {value: "p"})%>
+                        <%=f.submit "P", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+                <div>
+                    <%=form_for :game, url: game_path(g), method: :patch do |f|%>
+                        <%=hidden_field(:game, :chal_throw, {value: "s"})%>
+                        <%=f.submit "S", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+            </td>
+        <%else%>
+            <td></td>
+        <%end%>
+    </tr>
+<%end%>
+</table>

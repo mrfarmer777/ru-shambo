@@ -49,8 +49,9 @@ class User < ApplicationRecord
     
     #////////////VIEW HELPERS/////////////////////
     def active_games
-        self.games.select{|g| g.status=="Your Throw"}
+        self.games.select{|g| !g.complete?}
     end
+    
             
             
     

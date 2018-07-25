@@ -4,7 +4,8 @@ class MatchesController < ApplicationController
     #show the details of a single match
     def show
         @match=Match.find(params[:id])
-        @games=@match.games
+        @all_games=Game.match_games(@match.id)
+        @active_games=Game.match_active_games(@match.id)
         @challenger=@match.challenger
         @opponent=@match.opponent
     end

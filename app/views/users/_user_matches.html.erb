@@ -2,19 +2,39 @@
     <thead>
         <tr class="yellow">
             <th>Opponent</th>
-            <th>Last Action</th>
             <th>Match Record (all time)</th>
-            <th>Total Games</th>
-            <th>Actions</th>
+            <th>View Match</th>
+            <th>Quick Play</th>
         </tr>
     </thead>
     <% matches.each do |m|%>
         <tr><a href="<%=match_path(m)%>">
             <td><%=m.opponent_name%></td>
-            <td><%=m.updated_at%></td>
             <td><%=m.record%></td>
-            <td><%=m.game_count%></td>
-            <td><a href="<%=match_path(m)%>" class="btn btn-warning circle-sm">V</a><p class="circle-helper">View Match</p></a></td>
+            <td><a href="<%=match_path(m)%>" class="btn btn-warning circle-sm">V</a></a></td>
+            <td class="circle-group">
+                <div>
+                    <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
+                        <%=hidden_field(:game, :match_id, {value: m.id})%>
+                        <%=hidden_field(:game, :chal_throw, {value: "r"})%>
+                        <%=f.submit "R", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+                <div>
+                    <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
+                        <%=hidden_field(:game, :match_id, {value: m.id})%>
+                        <%=hidden_field(:game, :chal_throw, {value: "p"})%>
+                        <%=f.submit "P", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+                <div>
+                    <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
+                        <%=hidden_field(:game, :match_id, {value: m.id})%>
+                        <%=hidden_field(:game, :chal_throw, {value: "s"})%>
+                        <%=f.submit "S", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+            </td>
         </tr>
     <%end%>
     
