@@ -17,15 +17,5 @@
             <td><a href="<%=match_path(m)%>" class="btn btn-warning circle-sm">V</a><p class="circle-helper">View Match</p></a></td>
         </tr>
     <%end%>
-    <tr>
-        <td colspan="4" class="form-group row">
-            
-            <%=form_for @match, url: user_matches_path(@user) do |f|%>
-                    <%=collection_select :match, :opponent_id, User.all.select {|u|  u.id!=@user.id }, "id", "name", {:include_blank => "Select a New Opponent!"}%>
-        </td>
-        <td>
-                    <%=f.submit "Challenge Opponent!", class:"btn btn-default"%>
-            <%end%>
-        </td>
-    </tr>
+    
 </table>
