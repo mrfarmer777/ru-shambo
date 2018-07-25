@@ -1,18 +1,31 @@
 <h1>Sign up for Ru-Shambo</h1>
-<%if @user.errors.any?%>
-    <div class="error_explanation">
-        <p><%=pluralize(@user.errors.count, "error")%> prohibited this match from being created: </p>
-        <ul>
-            <% @user.errors.full_messages.each do |msg|%>
-                <li><%=msg%></li>
-            <%end%>
-        </ul>
+<div class="row">
+    <%if @user.errors.any?%>
+        <div class="error_explanation">
+            <p><%=pluralize(@user.errors.count, "error")%> prohibited this match from being created: </p>
+            <ul>
+                <% @user.errors.full_messages.each do |msg|%>
+                    <li><%=msg%></li>
+                <%end%>
+            </ul>
+        </div>
+    <%end%>
+    <div class="col-xs-4 col-xs-offset-4">
+        <%=form_for :user, url: users_path, class: "form " do |f|%>
+            <%=f.text_field :name, class: "form-control mb-2 mr-sm-2", placeholder: "Name"%><br>
+            <%=f.text_field :email, class: "form-control mb-2 mr-sm-2", placeholder: "Email"%><br>
+            <%=f.password_field :password, class: "form-control mb-2 mr-sm-2", placeholder: "Password"%><br>
+            <%=f.hidden_field :image, {value: "https://upload.wikimedia.org/wikipedia/commons/5/53/Gray_-_replace_this_image_male.svg"}%>
+            <%=f.submit "S", class:"btn btn-primary circle"%>
+            <p class="circle-helper">Sign Up</p>
+        <%end%>
+        
+        <p style="color:#404040">or you could just</p>
+         <%= link_to "G", "/auth/google_oauth2", class:"btn btn-primary circle"%>
+        <p class="circle-helper">Login with Google</p>
     </div>
-<%end%>
-<%=form_for :user, url: users_path do |f|%>
-    Name: <%=f.text_field :name%>
-    Email: <%=f.text_field :email%>
-    Password: <%=f.password_field :password%>
-    <%=f.hidden_field :image, {value: "https://upload.wikimedia.org/wikipedia/commons/5/53/Gray_-_replace_this_image_male.svg"}%>
-    <%=f.submit "Let's get throwing!"%>
-<%end%>
+    
+    
+</div>
+
+

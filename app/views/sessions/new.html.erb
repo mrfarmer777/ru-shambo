@@ -1,12 +1,23 @@
 <h1>Log in</h1>
 
-<div class="flash_message">
-    <%=flash[:message] if flash[:message]%>
+
+<div class="row">
+    <div class="flash_message">
+        <% if flash[:message]%>
+            <div class="btn btn-danger circle-sm">!</div>
+            <div><%= flash[:message]%></div>
+        <%end%>
+    </div>
+    
+    <div class="col-xs-4 col-xs-offset-4">
+        <%=form_for :user, url: "/login", method: :post, class: "form-inline" do |f| %>
+            <%=f.text_field :email, class: "form-control", placeholder: "Email" %><br>
+            <%=f.password_field :password, class: "form-control", placeholder: "Password" %><br>
+            <%=f.submit "L", class: "btn btn-primary circle"%>
+            <p class="circle-helper">Login and Get Throwin'</p>
+            
+        <%end%>
+    </div>
 </div>
-<%=form_for :user, url: "/login", method: :post do |f| %>
-    Email: <%=f.text_field :email %><br>
-    Password: <%=f.password_field :password %><br>
-    <%=f.submit "Get Throwing!"%>
-<%end%>
 
 <%=link_to "Log in with Google", "/auth/google_oauth2"%>
