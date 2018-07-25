@@ -38,6 +38,14 @@
  text-align:CENTER;
 }
 
+.navbar-header {
+    float: left;
+    padding: 15px;
+    text-align: center;
+    width: 100%;
+}
+.navbar-brand {float:none;}
+
 /*CIRCLE BUTTONS AND LINKS*/
 .circle {
  font-size: 1.5em;
@@ -69,6 +77,15 @@
  -webkit-transition: opacity 0.5s; /* Safari */
  transition: opacity 0.5s;
  transition-timing-function: ease-out;
+}
+
+.circle-group div {
+ display: inline-block;
+}
+
+/*LOOK AT THE COLORS*/
+.med-grey{
+ background-color:#505050;
 }
 
 

@@ -1,8 +1,21 @@
-<h2>Welcome, <%=@user.name%></h2>
+<div class="med-grey">
+    <h2><%=@user.name%></h2>
+    <p>Ru-Rank: <%=@user.points_rank%> | Throw Master</p>
+    <div class="circle-group row">
+        <div>
+            <a href="<%=logout_path%>" class="btn btn-warning circle">L</a>
+            <p class="circle-helper">Logout</p>
+        </div>
+        <div>
+            <a href="<%=new_game_path%>" class="btn btn-primary circle">N</a>
+            <p class="circle-helper">New Game</p>
+        </div>
+    </div>
+</div>
 
 
-<%= link_to "Log Out", logout_path%>
-<%= link_to "Create New Game", new_game_path%>
+
+
 
 <h3>Challenge a New Opponent</h3>
 <% if @match.errors.any? %>
@@ -20,9 +33,30 @@
     <%=f.submit "Challenge Opponent!"%>
 <%end%>
 
-<h3>My Matches: </h3>
-<%= render partial: "users/user_matches", locals:{matches: @user.matches}%>
-<%=link_to "View My Matches", user_matches_path(@user)%>
+
+<div class="row">
+    <div class="col-md-12 med-grey">
+        <h3>My Matches: </h3>
+        <%= render partial: "users/user_matches", locals:{matches: @user.matches}%>
+        <%=link_to "View My Matches", user_matches_path(@user)%>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12 med-grey">
+        <h3>My Stats:</h3>
+        <%if @user.games.count>0%>
+            <p><b>Record (All-time): </b><%=@user.record%></p>
+            <p><b>Win Percentage: </b><%=@user.win_percentage%></p>
+            <p><b>Favorite Opponent: </b><%=@user.favorite_opponent%></p>
+            <p><b>Overall Rank: </b><%=@user.points_rank%></p>
+            <p><b>Favorite Throw: </b><%=@user.favorite_throw%></p>
+        <%else%>
+            <p>No games played yet!</p>
+        <%end%>
+    </div>
+</div>
+
 
 <h3>My Stats:</h3>
 <%if @user.games.count>0%>

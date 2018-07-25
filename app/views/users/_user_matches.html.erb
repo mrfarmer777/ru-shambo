@@ -1,10 +1,12 @@
-<table>
-    <tr>
-        <th>Opponent</th>
-        <th>Started</th>
-        <th>Total Games</th>
-        <th>Actions</th>
-    </tr>
+<table class="table table-sm table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Opponent</th>
+            <th>Started</th>
+            <th>Total Games</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
     <% matches.each do |m|%>
         <tr><a href="<%=match_path(m)%>">
             <td><%=m.opponent_name%> </td>
