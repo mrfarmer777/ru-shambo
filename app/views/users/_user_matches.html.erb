@@ -13,12 +13,28 @@
             <td><%=m.updated_at%></td>
             <td><%=m.game_count%></td>
             <td><a href="<%=match_path(m)%>" class="btn btn-warning circle-sm">V</a><p class="circle-helper">View Match</p></td>
-            <td>
-                <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
-                    <%=hidden_field(:game, :match_id,{value: m.id})%>
-                    <%=select(:game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])) %>
-                    <%=f.submit "New Game with Throw"%>
-                <%end%>
+            <td class="circle-group">
+                <div>
+                    <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
+                        <%=hidden_field(:game, :match_id,{value: m.id})%>
+                        <%=hidden_field(:game, :chal_throw, {value: "r"})%>
+                        <%=f.submit "R", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+                <div>
+                    <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
+                        <%=hidden_field(:game, :match_id,{value: m.id})%>
+                        <%=hidden_field(:game, :chal_throw, {value: "p"})%>
+                        <%=f.submit "P", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+                <div>
+                    <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
+                        <%=hidden_field(:game, :match_id,{value: m.id})%>
+                        <%=hidden_field(:game, :chal_throw, {value: "s"})%>
+                        <%=f.submit "S", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
             </td>
             </a>
         </tr>
