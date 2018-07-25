@@ -12,7 +12,7 @@
             <td><%=m.opponent_name%> </td>
             <td><%=m.updated_at%></td>
             <td><%=m.game_count%></td>
-            <td><%=link_to "View", user_match_path(@user,m)%></td>
+            <td><a href="<%=match_path(m)%>" class="btn btn-warning circle-sm">V</a><p class="circle-helper">View Match</p></td>
             <td>
                 <%=form_for :game, url: user_games_path(@user), method: :post do |f|%>
                     <%=hidden_field(:game, :match_id,{value: m.id})%>

@@ -1,0 +1,16 @@
+<table class="table table-bordered">
+    <tr>
+        <th>Opponent</th>
+        <th>Game Start</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    <% games.each do |g|%>
+    <tr> 
+        <td><%=g.opponent_name%></td>
+        <td><%=g.created_at%></td>
+        <td><%=g.status%></td>
+        <td><%=g.status=="Your Throw" ? link_to("Play Game", game_path(g)) : g.result %></td>
+    </tr>
+<%end%>
+</table>

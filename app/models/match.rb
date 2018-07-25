@@ -62,4 +62,8 @@ class Match < ApplicationRecord
         self.games.count
     end
     
+    def self.user_active_games(user_id)
+        where(challenger_id: user_id).collect{|m| Game.match_active_games(m.id)}
+    end
+    
 end

@@ -1,4 +1,4 @@
-<div class="med-grey top-panel">
+<div class="med-grey panel">
     <h2><%=@user.name%></h2>
     <p>Ru-Rank: <%=@user.points_rank%> | Throw Master</p>
     <div class="circle-group row">
@@ -33,6 +33,12 @@
     <%=f.submit "Challenge Opponent!"%>
 <%end%>
 
+<div class="row">
+    <div class="col-md-12 med-grey panel panel-left">
+        <h3>Active Games: </h3>
+        <%= render partial: "users/user_games", locals:{games: @user.active_games}%>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-md-12 med-grey panel panel-left">

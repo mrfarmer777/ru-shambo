@@ -46,6 +46,11 @@ class User < ApplicationRecord
             end
         end
     end
+    
+    #////////////VIEW HELPERS/////////////////////
+    def active_games
+        self.games.select{|g| g.status=="Your Throw"}
+    end
             
             
     
