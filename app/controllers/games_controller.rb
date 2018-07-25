@@ -2,15 +2,19 @@ class GamesController < ApplicationController
     
     
     def new
+        #can add logic to handle nested match/:id/games path
         @game=Game.new
-        @user=User.find(session[:user_id])
+        @user=User.find(current_user)
     end
     
     def create
-       @match=Match.find(game_params[:match_id])
-       @match.games.build(game_params)
-       @match.save #? Necessary?
-       redirect_to user_path(session[:user_id])
+        @user=User.find(params[:user_id])
+        @game=Game.new(game_params)
+        if @game.save
+            redirect_to game_path(@game)
+        else
+            render "new"
+        end
     end
     
     def show

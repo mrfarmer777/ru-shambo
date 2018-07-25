@@ -1,0 +1,38 @@
+<div class="row panel med-grey">
+   <table class="table">
+    <tr>
+        <td class="col-sm-5"><%=game.match.challenger_name%></td>
+        <td>vs.</td>
+        <td>
+            <%if match.nil? %>
+                <%=collection_select(:game, :match_id, @user.matches, "id", "opponent_name")%>
+            <%else%>
+                <%=match.opponent_name %>
+            <%end%>
+
+        </td>
+    </tr>
+    <tr>
+        <% if @game.status=="Your Throw"%>
+        <td>
+            <%=form_for(:game, url: game_path(@game), method: :patch) do |f|%>
+            <%=select(:game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])) %>
+            <%=f.submit "Play this Throw"%>
+            </td>
+            <%end%>
+        </td>
+        
+        <%else%>
+            <td><%=@game.chal_throw%></td>
+        <%end%>
+        <td></td>
+        <td><%=@game.status=="Completed" ? @game.opp_throw : "?" %></td>
+    </tr>
+    <tr>
+        <td>Game Number: <%=@match.game_count%></td>
+    </tr>
+    
+    <h3><%=@game.result if @game.status=="Completed"%></h3>
+    
+</table> 
+</div>

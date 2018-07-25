@@ -1,9 +1,50 @@
 <h1>Create a New Game!</h1>
 
-<%=form_for :game, url: games_path, method: :post do |f|%>
-    <p>Whom would you like to challenge?</p><br>
-    <%=collection_select :game, :match_id, @user.matches, "id", "opponent_name" %><br>
+<% if @game.errors.any? %>
+    <div class="error_explanation">
+        <p><%=pluralize(@game.errors.count, "error")%> prohibited this game from being created: </p>
+            <% @game.errors.full_messages.each do |msg|%>
+                <p class="error-text"><%=msg%></p>
+            <%end%>
+    </div>
+<%end%>
+
+<div class="row panel med-grey">
+    <table class="table game-table">
+        <tr>
+            <td>
+                <%=@user.name%>
+            </td>
+            <td>
+                vs.
+            </td>
+            <td>
+                <div class="col-xs-12">
+                    <%=form_for :game, url: user_games_path(@user), method: :post, class:"form-inline" do |f|%>
+                    <%=collection_select :game, :match_id, @user.matches, "id", "opponent_name", {prompt: "Select your opponent"},class: "form-control" %><br>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="<%=@user.image%>" class="avatar">
+            </td>
+            <td></td>
+            <td>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Question-mark-face.jpg" class="avatar">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <%=select :game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]]),{}, class: "form-control"%><br>
+            </td>
+            <td><%=f.submit "S", class: "btn btn-success circle"%><p class="circle-helper">Start Game</p></td>
+            <td></td>
+        </tr>
+    </table>
+</div>
+
+
     <p>What is your throw (your opponent won't see it until its too late!!!</p><br>
-    <%=select :game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])%><br>
-    <%=f.submit "Start Game!"%>
+    
 <%end%>
