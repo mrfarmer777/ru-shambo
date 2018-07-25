@@ -62,8 +62,20 @@ class Match < ApplicationRecord
         self.games.count
     end
     
-    def self.user_active_games(user_id)
-        where(challenger_id: user_id).collect{|m| Game.match_active_games(m.id)}
+    def chal_wins
+        self.games.select{|g| g.result.include?("Congratulations")}.count
+    end
+    
+    def chal_losses
+        self.games.select{|g| g.result.include?("Sorry")}.count
+    end
+    
+    def draws
+        self.games.select{|g| g.result.include?("Draw")}.count
+    end
+    
+    def record
+        "#{self.chal_wins}-#{self.chal_losses}-#{self.draws}"
     end
     
 end

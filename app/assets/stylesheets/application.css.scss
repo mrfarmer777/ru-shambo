@@ -104,10 +104,19 @@
 }
 
 
+/*TABLES*/
+td, th {
+ color:#ccc;
+}
+
 
 /*LOOK AT THE COLORS*/
 .med-grey{
  background-color:#505050;
+}
+
+.yellow {
+ background-color:#a0a000;
 }
 
 
@@ -118,6 +127,10 @@
 
 .error-explanation{
  color:#aa00a0;
+}
+
+.error-text{
+ color:red;
 }
 
 
