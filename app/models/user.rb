@@ -5,9 +5,49 @@ class User < ApplicationRecord
     validates :name, presence: true
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
     validates :email, uniqueness: true
-    validates :uid, presence: true
-    validates :uid, numericality: {only_integer: true}
-    validates :uid, uniqueness: true
+    has_secure_password
+    
+    #///////////CLASS METHODS/////////////////////
+    
+    def self.find_or_create_by_omniauth(auth_hash)
+        
+        #extracts email from request.env auth hash
+        oauth_email=auth_hash["info"]["email"]
+        oauth_name=auth_hash["info"]["name"]
+        oauth_uid=auth_hash["info"]["uid"]
+        oauth_image=auth_hash["info"]["image"]
+
+        
+        #Will always return a user instance
+        #either one that was created with these parameters, or one that has just been assigned
+        self.where(uid:oauth_uid).first_or_create do |user|
+            #will only run when a user created!? AWESOME
+            user.password=SecureRandom.hex
+            user.name=oauth_name
+            user.email=oauth_email
+            user.image=oauth_image
+        end
+        
+        #If we've already got this user...
+        if user=User.find_by(email: oauth_email)
+            #get the user and hand them back to the session controller
+            return user
+        #If they're a new user through oauth...
+        else
+            #make a new user using their email, set a randomized password (so no one else can hack in through the local login method?)
+            #Want to make new users with more than email in the future...
+            user.User.create(:email=>oauth_email, password: SecureRandom.hex)
+            
+            if user.save
+                session[:user_id] = user.id
+                redirect_to root_path
+            else
+                raise user.errors.full_messages.inspect
+            end
+        end
+    end
+            
+            
     
     
     #////////////STATS HELPERS/////////////////////
@@ -28,7 +68,11 @@ class User < ApplicationRecord
     end
     
     def win_percentage
-        self.wins/(self.games.count)
+        if self.games.count>0
+            self.wins/(self.games.count)
+        else
+            0
+        end
     end
     
     def favorite_throw

@@ -25,10 +25,14 @@
 <%=link_to "View My Matches", user_matches_path(@user)%>
 
 <h3>My Stats:</h3>
-<p><b>Record (All-time): </b><%=@user.record%></p>
-<p><b>Win Percentage: </b><%=@user.win_percentage%></p>
-<p><b>Favorite Opponent: </b><%=@user.favorite_opponent%></p>
-<p><b>Overall Rank: </b><%=@user.points_rank%></p>
-<p><b>Favorite Throw: </b><%=@user.favorite_throw%></p>
+<%if @user.games.count>0%>
+    <p><b>Record (All-time): </b><%=@user.record%></p>
+    <p><b>Win Percentage: </b><%=@user.win_percentage%></p>
+    <p><b>Favorite Opponent: </b><%=@user.favorite_opponent%></p>
+    <p><b>Overall Rank: </b><%=@user.points_rank%></p>
+    <p><b>Favorite Throw: </b><%=@user.favorite_throw%></p>
+<%else%>
+    <p>No games played yet!</p>
+<%end%>
 
 

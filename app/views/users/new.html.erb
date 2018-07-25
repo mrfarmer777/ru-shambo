@@ -1,0 +1,18 @@
+<h1>Sign up for Ru-Shambo</h1>
+<%if @user.errors.any?%>
+    <div class="error_explanation">
+        <p><%=pluralize(@user.errors.count, "error")%> prohibited this match from being created: </p>
+        <ul>
+            <% @user.errors.full_messages.each do |msg|%>
+                <li><%=msg%></li>
+            <%end%>
+        </ul>
+    </div>
+<%end%>
+<%=form_for :user, url: users_path do |f|%>
+    Name: <%=f.text_field :name%>
+    Email: <%=f.text_field :email%>
+    Password: <%=f.password_field :password%>
+    <%=f.hidden_field :image, {value: "https://upload.wikimedia.org/wikipedia/commons/5/53/Gray_-_replace_this_image_male.svg"}%>
+    <%=f.submit "Let's get throwing!"%>
+<%end%>

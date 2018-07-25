@@ -1,0 +1,12 @@
+<h1>Log in</h1>
+
+<div class="flash_message">
+    <%=flash[:message] if flash[:message]%>
+</div>
+<%=form_for :user, url: "/login", method: :post do |f| %>
+    Email: <%=f.text_field :email %><br>
+    Password: <%=f.password_field :password %><br>
+    <%=f.submit "Get Throwing!"%>
+<%end%>
+
+<%=link_to "Log in with Google", "/auth/google_oauth2"%>
