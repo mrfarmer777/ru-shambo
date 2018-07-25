@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     
     def show
         #Is the user trying to view their own page?
-        if session[:user_id]==params[:id].to_i
+        if current_user==params[:id].to_i
             #if so, move along
             @user=User.find(params[:id].to_i)
             @match=Match.new
