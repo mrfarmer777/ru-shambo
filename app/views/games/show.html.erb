@@ -1,33 +1,67 @@
-<h1>Let's Play...</h1>
+<h1>Game Details</h1>
+<h3>Game <%=@match.game_count+1%></h3>
 <%=link_to "Back to User page", user_path(@user)%>
 
-
-<table>
-    <tr>
-        <td><%=@game.match.challenger_name%></td>
-        <td>vs.</td>
-        <td><%=@game.match.opponent_name%></td>
-    </tr>
-    <tr>
-        <% if @game.status=="Your Throw"%>
-        <td>
-            <%=form_for(:game, url: game_path(@game), method: :patch) do |f|%>
-            <%=select(:game, :chal_throw, options_for_select([["Rock","r"],["Paper","p"],["Scissors","s"]])) %>
-            <%=f.submit "Play this Throw"%>
+<div class="row panel med-grey">
+    <table class="table game-table">
+        <tr>
+            <td>
+                <%=@user.name%>
             </td>
+            <td>
+                vs.
+            </td>
+            <td>
+                <div class="col-xs-12">
+                    <%=@match.opponent_name%>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="<%=@user.image%>" class="avatar">
+            </td>
+            <td>Status: <%=@game.status%></td>
+            <td>
+                <img src="<%=@game.opponent_image%>" class="avatar">
+            </td>
+        </tr>
+        <tr>
+            <%if @game.status=="Your Throw"%>
+                <td class="circle-group">
+                    <div>
+                        <%=form_for :game, url: user_game_path(@user,@game), method: :patch do |f|%>
+                            <%=hidden_field(:game, :chal_throw, {value: "r"})%>
+                            <%=f.submit "R", class: "btn btn-primary circle-sm"%>
+                        <%end%>
+                    </div>
+                    <div>
+                        <%=form_for :game, url: user_game_path(@user,@game), method: :patch do |f|%>
+                            <%=hidden_field(:game, :chal_throw, {value: "p"})%>
+                            <%=f.submit "P", class: "btn btn-primary circle-sm"%>
+                        <%end%>
+                    </div>
+                    <div>
+                        <%=form_for :game, url: user_game_path(@user,@game), method: :patch do |f|%>
+                            <%=hidden_field(:game, :chal_throw, {value: "s"})%>
+                            <%=f.submit "S", class: "btn btn-primary circle-sm"%>
+                        <%end%>
+                    </div>
+                </td>
+            <%else%>
+                <td><%=@game.chal_throw%></td>
             <%end%>
-        </td>
-        
-        <%else%>
-            <td><%=@game.chal_throw%></td>
-        <%end%>
-        <td></td>
-        <td><%=@game.status=="Completed" ? @game.opp_throw : "?" %></td>
-    </tr>
-    <tr>
-        <td>Game Number: <%=@match.game_count%></td>
-    </tr>
-    
-    <h3><%=@game.result if @game.status=="Completed"%></h3>
-    
-</table>
+            <td>Game Throws</td>
+            <td>
+                <%=@game.complete? ? @game.opp_throw : "?"%>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+
+
+
+
+<

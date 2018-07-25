@@ -20,7 +20,7 @@ class GamesController < ApplicationController
     def show
         @game=Game.find(params[:id].to_i)
         @match=@game.match
-        @user=User.find(session[:user_id])
+        @user=User.find(current_user)
     end
     
     def update

@@ -95,6 +95,10 @@ class Game < ApplicationRecord
         self.match.opponent_name
     end
     
+    def opponent_image
+        self.match.opponent.image
+    end
+    
     def self.match_games(match_id)
         where(match_id: match_id)
     end

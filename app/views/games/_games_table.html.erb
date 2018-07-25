@@ -1,15 +1,15 @@
 <table class="table table-bordered">
     <tr>
         <th>Opponent</th>
-        <th>Game Start</th>
         <th>Status</th>
-        <th>Action</th>
+        <th>View</th>
+        <th>Quick Play</th>
     </tr>
     <% games.each do |g|%>
     <tr> 
         <td><%=g.opponent_name%></td>
-        <td><%=g.created_at%></td>
         <td><%=g.status%></td>
+        <td><%=link_to "v", user_game_path(@user,g), class: "btn btn-warning circle-sm"%></td>
         <%if g.status=="Your Throw"%>
             <td class="circle-group">
                 <div>

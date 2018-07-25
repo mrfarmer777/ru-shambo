@@ -8,8 +8,8 @@
     <% games.each do |g|%>
     <tr> 
         <td><%=g.opponent_name%></td>
-        <td><%=g.created_at%></td>
         <td><%=g.status%></td>
+        <td><%=link_to "v", user_game_path(@user,g), class: "btn btn-warning circle-sm"%></td>
         <td class="circle-group">
             <div>
                 <%=form_for :game, url: game_path(g), method: :patch do |f|%>
