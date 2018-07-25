@@ -1,7 +1,11 @@
-<h1>Ru-Shambo - <em>with friends!</em></h1>
+<h1 class="logo">RU | SHAM | BO</h1>
 
 
 
-<%=link_to "Sign up", new_user_path %><br>
-<%=link_to "Login", login_path %><br>
-<a href="/auth/google_oauth2">Log in with Google</a><br>
+
+<a href="/users/new" class="btn btn-primary circle" id="sign-up">S</a>
+<p class="circle-helper">Sign Up</p>
+<a href="/login" class="btn btn-warning circle" id="login">L</a>
+<p class="circle-helper">Login</p>
+<a href="/auth/google_oauth2" class="btn btn-danger circle" id="google-login">G</a>
+<p class="circle-helper">Login with Google</p>
