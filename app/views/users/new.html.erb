@@ -3,11 +3,9 @@
     <%if @user.errors.any?%>
         <div class="error_explanation">
             <p><%=pluralize(@user.errors.count, "error")%> prohibited this match from being created: </p>
-            <ul>
-                <% @user.errors.full_messages.each do |msg|%>
-                    <li><%=msg%></li>
-                <%end%>
-            </ul>
+            <% @user.errors.full_messages.each do |msg|%>
+                <pi class="error-text"><%=msg%></p>
+            <%end%>
         </div>
     <%end%>
     <div class="col-xs-4 col-xs-offset-4">

@@ -122,8 +122,9 @@ td, th {
 
 
 /*ERRORS*/
-.field-with-errors{
+.field_with_errors * {
  display:inline;
+ border: solid 2px #ff3030;
 }
 
 .error-explanation{
