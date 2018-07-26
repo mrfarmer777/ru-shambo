@@ -21,7 +21,7 @@
             <td>
                 <img src="<%=@user.image%>" class="avatar">
             </td>
-            <td>Status: <%=@game.status%></td>
+            <td>Status: <%=@game.status%><br><%=@game.result if @game.complete?%></td>
             <td>
                 <img src="<%=@game.opponent_image%>" class="avatar">
             </td>

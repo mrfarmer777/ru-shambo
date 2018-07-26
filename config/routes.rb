@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :edit, :update, :show, :index, :destroy] do
     resources :matches, only: [:create, :show, :index, :destroy]
-    resources :games, only: [:create,:show]
+    resources :games, only: [:create,:show, :update]
   end
   
   resources :matches, only: [:show, :destroy]
