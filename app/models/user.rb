@@ -105,9 +105,7 @@ class User < ApplicationRecord
         User.rank_by_points.index(self)+1
     end
     
-    def get_throw_master
-        User.rank_by_win_percentage.first
-    end
+    
     
     #////////////RANKING HELPERS (OBJECT SCOPE)/////////////////////
     def self.rank_by_win_percentage
@@ -118,5 +116,8 @@ class User < ApplicationRecord
         User.all.sort_by{|u| u.points}.reverse!
     end
     
+    def get_throw_master
+        User.rank_by_win_percentage.first
+    end
 
 end
