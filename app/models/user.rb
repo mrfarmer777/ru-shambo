@@ -123,9 +123,7 @@ class User < ApplicationRecord
         User.all.sort_by{|u| u.points}.reverse!
     end
     
-    def self.most_matches
-        User.all.sort_by{|u| u.matches.count}.reverse!.first
-    end
+   
     
     def get_throw_master
         User.rank_by_win_percentage.first
