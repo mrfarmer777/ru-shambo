@@ -6,10 +6,10 @@ class User < ApplicationRecord
     validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create
     validates :email, uniqueness: true
     
-    scope :most_matches, ->{joins(:matches).group(:id).order("COUNT(matches.id) DESC").limit(1)}
-    scope :fewest_matches, ->{joins(:matches).group(:id).order("COUNT(matches.id) ASC").limit(1)}
-    scope :most_games, ->{joins(:matches).joins(:games).group(:id).order("COUNT(games.id) DESC").limit(1)}
-    scope :fewest_games, ->{joins(:matches).joins(:games).group(:id).order("COUNT(games.id) ASC").limit(1)}
+    scope :most_matches, ->{joins(:matches).group(:id).order("COUNT(matches.id) DESC,name DESC").first}
+    scope :fewest_matches, ->{joins(:matches).group(:id).order("COUNT(matches.id) ASC, name DESC").first}
+    scope :most_games, ->{joins(:matches).joins(:games).group(:id).order("COUNT(games.id) DESC, name DESC").first}
+    scope :fewest_games, ->{joins(:matches).joins(:games).group(:id).order("COUNT(games.id) ASC, name DESC").first}
 
     
     has_secure_password
