@@ -1,8 +1,12 @@
 <h1>Ru-Sham-bo-ers</h1>
 <h2>Leaderboard</h2>
 
-<ol>
-    <% @users.each do |u|%>
-        <li><%=link_to u.name, user_path(u)%> (<%=u.matches.count%> Active Matches)</li>
-    <%end%>
-</ol>
+
+<div class="panel med-grey">
+    <ol style="text-align:left; color: white">
+        <% @users.each do |u|%>
+            <li><%=link_to u.name, user_path(u)%> (<%=u.win_percentage%>% Win Percentage)</li>
+        <%end%>
+    </ol>
+</div>
+

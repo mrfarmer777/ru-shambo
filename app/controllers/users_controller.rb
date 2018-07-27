@@ -38,7 +38,7 @@ class UsersController < ApplicationController
     end
     
     def index
-        @users=User.all
+        @users=User.rank_by_win_percentage
     end
     
     private 
