@@ -41,6 +41,14 @@ class UsersController < ApplicationController
         @users=User.all
     end
     
+    def most_matches
+        @user_most_matches=User.most_matches
+        @user_fewest_matches=User.fewest_matches
+        @user_most_games=User.most_games
+        @user_fewest_games=User.fewest_matches
+        render "most_matches"
+    end
+    
     private 
     
     def user_params
