@@ -3,9 +3,10 @@ class MatchesController < ApplicationController
     
     #show the details of a single match
     def show
+        @user=User.find(current_user);
         @match=Match.find(params[:id])
         @all_games=Game.match_games(@match.id)
-        @active_games=Game.match_active_games(@match.id)
+        @active_games=@all_games.select{|g| !g.complete?}
         @challenger=@match.challenger
         @opponent=@match.opponent
     end
@@ -39,7 +40,7 @@ class MatchesController < ApplicationController
                     #Create a new match
             @match=Match.new(challenger_id: @user.id, opponent_id: match_params[:opponent_id])
             if @match.save #When created, an inverse match is also automatically created
-                redirect_to user_match_path(@user,@match)
+                redirect_to user_path(@user)
             else
                 render :"users/show"
             end

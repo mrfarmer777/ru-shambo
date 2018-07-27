@@ -6,12 +6,20 @@
 </div>
 <div class="panel med-grey">
     <h3>Active Games: </h3>
-    <%= render partial: "games/games_table", locals: {games: @all_games}%>
+    <% if !@active_games.nil? %>
+        <%= render partial: "games/games_table", locals: {games: @active_games}%>
+    <%else%>
+        <p>No Active Games</p>
+    <%end%>
 </div>
 
 <div class="panel med-grey">
     <h3>All Games: </h3>
-    <%= render partial: "games/games_table", locals: {games: @active_games}%>
+    <%if !@all_games.nil?%>
+        <%= render partial: "games/games_table", locals: {games: @all_games}%>
+    <%else%>
+        <p>No Active Games</p>    
+    <%end%>
 
     
 </div>
