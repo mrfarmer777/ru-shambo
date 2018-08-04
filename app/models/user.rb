@@ -82,7 +82,7 @@ class User < ApplicationRecord
     
     def win_percentage
         if self.games.count>0
-            (100.0*(self.wins/(self.games.count).to_f)).round(2)
+            (100.0*(self.wins/(self.wins+self.losses+self.draws).to_f)).round(2)
         else
             0
         end

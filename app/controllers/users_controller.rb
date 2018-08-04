@@ -54,6 +54,11 @@ class UsersController < ApplicationController
         render json: @user
     end
     
+    def leaders
+        @users=User.rank_by_win_percentage
+        render json: @users
+    end
+    
     
     
     private 
