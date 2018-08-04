@@ -1,3 +1,4 @@
+let userData;
 $(function(){
     userData=$.get(window.location.href+"/data");
     
@@ -15,6 +16,12 @@ $(function(){
     });
     
 });
+
+
+function loadUserData(){
+    
+    
+}
 
 function Match(id,opp,startDate){
     this.id=id;
@@ -50,11 +57,17 @@ function showMatch(match){
     let oppName=match.opponent.name;
     let oppImage=match.opponent.image;
     let userName=user.name;
-    let userImage=user.image
+    let userImage=user.image;
+    let matchId=match.id;
     let gameCount=match.games.length;
     let main=$("<div></div>").html(`${userName} vs. ${oppName}`);
     let stats=$("<div></div>").html(`Games: ${gameCount}`);
-    $("#wip").html("");
-    $("#wip").append(main).append(stats);
-  
+    $("#main-show").html("");
+    $("#main-show").append(main).append(stats);
+    $("#show-next").data("id",matchId+1);
+    $("#show-next").on("click",getMatchData);
+    $("#show-prev").data("id",matchId-1);
+    $("#show-next").on("click",getMatchData);
 }
+   
+
