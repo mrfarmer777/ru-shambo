@@ -9,6 +9,8 @@ $(function(){
             let newMatch=new Match(match.id, match.opponent, match.created_at);
             return newMatch;
         });
+        
+        
         buildMatchTable(matchObjs);
     });
     
@@ -28,7 +30,20 @@ Match.prototype.report=function(){
 function buildMatchTable(matchObjects){
     $("#wip").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Start Date</th></tr></table>");
     matchObjects.forEach(function(match){
-        $("#matches-table").append(`<tr><td>${match.opp.name}</td><td>${match.startDate}</td></tr>`);
+        let matchRow= $(`<tr data-id="${match.id}"></tr>`).html(`<td>${match.opp.name}</td><td>${match.startDate}</td>`);
+        matchRow.addClass("match-row");
+        matchRow.on("click",getMatchData);
+        matchRow.data("id",`${match.id}`);
+        $("#matches-table").append(matchRow);
     });
 }
     
+    
+function getMatchData(e){
+    e.preventDefault();
+    const matchId=this.dataset.id;
+    $.get("/matches/"+matchId).done(function(resp){
+        console.log(resp);
+    });
+    
+}
