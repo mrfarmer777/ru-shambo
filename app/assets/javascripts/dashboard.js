@@ -1,11 +1,11 @@
 let user;
-let userMatches;
-let showIndex;
+let userMatches=[];
+let showIndex=0;
 
 ///////DOCUMENT ON LOAD/////////////////////////
 $(function(){
     //Initial call to retrieve user data
-    let userData=$.get(window.location.href+"/data");
+    let userData=$.get(window.location.href+ "/data");
     
     //When it comes back
     userData.done(function(resp){
@@ -20,14 +20,12 @@ $(function(){
         buildMatchTable(userMatches);
     });
     
+    $("#show-next").on("click",showNext);
+    $("#show-prev").on("click",showPrev);
+    
     
 });
 
-
-function getActiveGames(){
-    
-    
-}
 
 
 
@@ -61,14 +59,22 @@ function buildMatchTable(matchObjects){
 ////////////SHOW VIEW OF MATCHES////////////////////////////////    
 function selectMatch(e){
     e.preventDefault();
-    showIndex=this.dataset.index;
+    showIndex=parseInt(this.dataset.index,10);
     getMatchData(userMatches[showIndex].id);
 }
 
-function scrollMatches(num){
-    showIndex+=num;
-    if(showIndex<0){
-        showIndex=0;
+function showNext(e){
+    e.preventDefault();
+    if(showIndex<userMatches.length-1){
+        showIndex+=1;
+    }
+    getMatchData(userMatches[showIndex].id);
+}
+
+function showPrev(e){
+    e.preventDefault();
+    if(showIndex>0){
+        showIndex-=1;
     }
     getMatchData(userMatches[showIndex].id);
 }
@@ -90,10 +96,6 @@ function showMatch(match){
     let stats=$("<div></div>").html(`Games: ${gameCount}`);
     $("#main-show").html("");
     $("#main-show").append(main).append(stats);
-    $("#show-next").data("id",matchId+1);
-    $("#show-next").on("click",getMatchData);
-    $("#show-prev").data("id",matchId-1);
-    $("#show-next").on("click",getMatchData);
 }
    
 
