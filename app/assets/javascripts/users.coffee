@@ -3,3 +3,4 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
+console.log("Hellow from the users controller js");
