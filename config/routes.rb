@@ -20,6 +20,6 @@ Rails.application.routes.draw do
   get '/users/:id/data' => 'users#data'
   get '/logout' => 'sessions#destroy'
   get '/most_matches' => 'users#most_matches'
-  get '/users/:id/games/active' => 'user#active_games'
+  get '/users/leaders' => 'user#leaders'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
