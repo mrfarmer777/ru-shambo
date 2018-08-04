@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback' => 'sessions#create'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
+  get '/users/:id/data' => 'users#data'
   get '/logout' => 'sessions#destroy'
   get '/most_matches' => 'users#most_matches'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

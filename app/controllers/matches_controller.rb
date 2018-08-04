@@ -4,10 +4,11 @@ class MatchesController < ApplicationController
     #show the details of a single match
     def show
         @match=Match.find(params[:id])
-        @all_games=Game.match_games(@match.id)
-        @active_games=Game.match_active_games(@match.id)
-        @challenger=@match.challenger
-        @opponent=@match.opponent
+        render json: @match, status: 200
+        #@all_games=Game.match_games(@match.id)
+        #@active_games=Game.match_active_games(@match.id)
+        #@challenger=@match.challenger
+        #@opponent=@match.opponent
     end
     
     #index the matches (for a user) 

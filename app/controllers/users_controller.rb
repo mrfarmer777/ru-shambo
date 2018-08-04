@@ -49,6 +49,11 @@ class UsersController < ApplicationController
         render "most_matches"
     end
     
+    def data
+        @user=User.find(params[:id])
+        render json: @user
+    end
+    
     private 
     
     def user_params
