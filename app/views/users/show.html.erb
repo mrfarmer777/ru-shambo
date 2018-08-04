@@ -39,54 +39,6 @@
 
 
 
-<% if @user.games.count>0%>
-    <div class="row">
-        <div class="col-md-12 med-grey panel panel-left">
-            <h3>Active Games: </h3>
-            <%= render partial: "games/games_table", locals:{games: @user.active_games}%>
-        </div>
-    </div>
-<%end%>
-
-<div class="row">
-    <div class="col-md-12 med-grey panel panel-left">
-        <div class="row">
-            <div class="col-xs-4">
-                <h3>My Matches:<a class="btn btn-primary circle-sm" style="padding-top:0px" data-toggle="collapse" href="#user_new_match_form">+</a> </h3>
-            </div>
-        </div>
-        
-        <div class="collapse" id="user_new_match_form">
-            <% if @match.errors.any? %>
-                <div class="error_explanation">
-                    <p><%=pluralize(@match.errors.count, "error")%> prohibited this match from being created: </p>
-                    <ul>
-                        <% @match.errors.full_messages.each do |msg|%>
-                            <li class="error-text"><%=msg%></li>
-                        <%end%>
-                    </ul>
-                </div>
-            <%end%>
-            <%=form_for @match, url: user_matches_path(@user), class:"form-inline" do |f|%>
-                <div class="form-row">
-                    <div class="col-sm-4 col-xs-6">
-                        <%=collection_select :match, :opponent_id, User.all.select {|u|  u.id!=@user.id }, "id", "name", {:include_blank => "Select a New Opponent"},{class: "form-control form-control-sm col-xs-2"}%>
-                    </div>
-                    <div class="col">
-                        <%=f.submit "C", class:"btn btn-success circle-sm"%>
-                        <p class="circle-helper">Challenge This Opponent</p>
-                    </div>
-                </div>
-            <%end%>
-        </div>
-            
-            
-            
-        <%= render partial: "users/user_matches", locals:{matches: @user.matches}%>
-        
-    </div>
-</div>
-
 <div class="row">
     <div class="col-md-12 med-grey panel panel-left">
         <h3>My Stats:</h3>

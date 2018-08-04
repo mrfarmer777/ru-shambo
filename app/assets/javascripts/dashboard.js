@@ -1,28 +1,33 @@
-let userData;
+let user;
+let userMatches;
+let showIndex;
+
+
 $(function(){
-    userData=$.get(window.location.href+"/data");
+    //Initial call to retrieve user data
+    let userData=$.get(window.location.href+"/data");
     
+    //When it comes back
     userData.done(function(resp){
-        console.log(resp);
         user=resp;
-        const matches=resp.matches;
-        const matchObjs=matches.map(function(match){
+        let matches=resp.matches;
+        userMatches=matches.map(function(match){
             let newMatch=new Match(match.id, match.opponent, match.created_at);
             return newMatch;
         });
         
-        
-        buildMatchTable(matchObjs);
+        //Renders the index view using AJAX data
+        buildMatchTable(userMatches);
     });
+    
+    $("#show-next").on("click",scrollMatches(1));
+    $("#show-prev").on("click",scrollMatches(-1));
     
 });
 
 
-function loadUserData(){
-    
-    
-}
 
+//Match object definition and Prototyping//////////////////
 function Match(id,opp,startDate){
     this.id=id;
     this.opp=opp;
@@ -34,24 +39,41 @@ Match.prototype.report=function(){
     return report;
 };
 
+
+
+/////////////INDEX VIEW OF MATCHES/////////////////////////////
 function buildMatchTable(matchObjects){
     $("#wip").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Start Date</th></tr></table>");
-    matchObjects.forEach(function(match){
-        let matchRow= $(`<tr data-id="${match.id}"></tr>`).html(`<td>${match.opp.name}</td><td>${match.startDate}</td>`);
+    matchObjects.forEach(function(match,ind){
+        let matchRow= $(`<tr data-id="${match.id}" data-index="${ind}"></tr>`).html(`<td>${match.opp.name}</td><td>${match.startDate}</td>`);
         matchRow.addClass("match-row");
-        matchRow.on("click",getMatchData);
+        matchRow.on("click",selectMatch);
         //matchRow.data("id",`${match.id}`);
         $("#matches-table").append(matchRow);
     });
 }
     
-    
-function getMatchData(e){
+
+////////////SHOW VIEW OF MATCHES////////////////////////////////    
+function selectMatch(e){
     e.preventDefault();
-    const matchId=this.dataset.id;
-    $.get("/matches/"+matchId).done(showMatch);
-    
+    showIndex=this.dataset.index;
+    getMatchData(userMatches[showIndex].id);
 }
+
+function scrollMatches(num){
+    showIndex+=num;
+    if(showIndex<0){
+        showIndex=0;
+    }
+    getMatchData(userMatches[showIndex].id);
+}
+
+function getMatchData(id){
+    $.get("/matches/"+id).done(showMatch)
+}
+
+
 
 function showMatch(match){
     let oppName=match.opponent.name;
