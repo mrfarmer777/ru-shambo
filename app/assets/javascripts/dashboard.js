@@ -2,7 +2,7 @@ let user;
 let userMatches;
 let showIndex;
 
-
+///////DOCUMENT ON LOAD/////////////////////////
 $(function(){
     //Initial call to retrieve user data
     let userData=$.get(window.location.href+"/data");
@@ -20,10 +20,14 @@ $(function(){
         buildMatchTable(userMatches);
     });
     
-    $("#show-next").on("click",scrollMatches(1));
-    $("#show-prev").on("click",scrollMatches(-1));
     
 });
+
+
+function getActiveGames(){
+    
+    
+}
 
 
 

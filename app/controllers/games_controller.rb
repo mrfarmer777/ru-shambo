@@ -29,9 +29,8 @@ class GamesController < ApplicationController
         redirect_to game_path(@game)
     end
     
-       
-       
     
+        
     
     private
     
