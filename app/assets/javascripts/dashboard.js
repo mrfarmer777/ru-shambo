@@ -46,7 +46,7 @@ Match.prototype.report=function(){
 
 /////////////INDEX VIEW OF MATCHES/////////////////////////////
 function buildMatchTable(matchObjects){
-    $("#matchboard-leader").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Start Date</th></tr></table>");
+    $("#matchboard-body").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Start Date</th></tr></table>");
     matchObjects.forEach(function(match,ind){
         let matchRow= $(`<tr data-id="${match.id}" data-index="${ind}"></tr>`).html(`<td>${match.opp.name}</td><td>${match.startDate}</td>`);
         matchRow.addClass("match-row");
@@ -103,8 +103,7 @@ function showMatch(match){
 
 function renderLeaderboardData(){
     $.get("/leaders").done(function(resp){
-        
-        $("#leaderboard-table").html('<table id="leaderboard-table" class="table"><tr><th>Rank</th><th>Title</th><th>Name</th><th>Overall Record</th><th>Win Percentage</th></tr></table>');
+        $("#leaderboard-table").html('<tr><th>Rank</th><th>Title</th><th>Name</th><th>Overall Record</th><th>Win Percentage</th></tr>').addClass("table");
         resp.forEach(function(leader,index){
             $("#leaderboard-table").append(`<tr><td>${index+1}</td><td></td><td>${leader.name}</td><td>${leader.record}</td><td>${leader.win_percentage}%</td></tr>`);
         });
