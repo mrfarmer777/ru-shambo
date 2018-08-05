@@ -140,10 +140,14 @@ function showMatch(match){
     let output=template(match);
     $("#main-show").html("")
     $("#main-show").append(output);
+    
+    //Add handlers to the scrolling buttons
     $("#show-next").on("click",showNext);
     $("#show-prev").on("click",showPrev);
     
     
+    //Add handlers to the throw buttons for a new game
+    $(".throw-btn").on("click",newGameWithThrow)
     /*
     let oppName=match.opponent.name;
     let oppImage=match.opponent.image;
@@ -157,6 +161,9 @@ function showMatch(match){
     $("#main-show").append(main).append(stats);
     */
 }
+
+
+////////MAKING A NEW GAME BASED UPON THE THROW BUTTON CHOSEN
 
 
 ////////RENDERING THE LEADERBOARD//////////////////////

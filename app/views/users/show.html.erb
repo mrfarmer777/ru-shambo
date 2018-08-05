@@ -76,7 +76,16 @@
         <h3>Match Details</h3>
         <table class="table">
             <tr><td><img src="{{challenger.image}}" class="avatar"/></td><td>vs</td><td><img src="{{opponent.image}}" class="avatar"/></td></tr>
-            <tr><td>{{challenger.name}}</td><td></td><td>{{opponent.name}}</td></tr>
+            <tr><td>{{challenger.name}}</td>
+            <td>
+                <a id="new-game-btn" data-toggle="collapse" data-target="#throw-buttons" class="btn btn-success circle-sm">N</a><p class="circle-helper">New Game<p>
+                <div id="throw-buttons" class="collapse">
+                    <a id="throw-rock" data-throw="r" class="btn btn-primary circle-sm throw-btn">R</a>
+                    <a id="throw-paper" data-throw="p" class="btn btn-primary circle-sm throw-btn">P</a>
+                    <a id="throw-scissors" data-throw="s" class="btn btn-primary circle-sm throw-btn">S</a>
+                </div>
+            </td>
+            <td>{{opponent.name}}</td></tr>
             <tr><td>Games Played: {{game_count}}</td><td>Record: {{record}}</td><td></td>
         </table>
         <a href="#" id="show-prev" class="btn btn-default circle-sm"><</a>
