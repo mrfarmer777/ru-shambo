@@ -12,7 +12,7 @@ class UserSerializer < ActiveModel::Serializer
   
   has_many :games, through: :matches
   class GameSerializer < ActiveModel::Serializer
-    attributes :id, :opponent_name, :status    
+    attributes :id, :opponent_name, :status, :result    
   end
   
 end

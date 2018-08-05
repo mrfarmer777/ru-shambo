@@ -19,8 +19,16 @@ $(function(){
         
         let games=resp.games
         games.forEach(function(game){
-            let newGame= new Game(game.id, game.opp_name, game.status, game.result)
+            
+            let newGame= new Game(game.id, game.opponent_name, game.status, game.result)
+            if(newGame.gameStatus==="Completed"){
+                userCompGames.push(newGame);
+            } else {
+                userActGames.push(newGame);
+            }
         })
+        
+        buildGamesTable(userActGames);
         
         
     });
@@ -34,15 +42,26 @@ $(function(){
 });
 
 /////GAME OBJECT DEFINITION AND PROTOTYPING////////////////
-function Game(id, opp, gameStatus, gameResult){
+function Game(id, opp_name, gameStatus, gameResult){
     this.id=id;
-    this.opp=opp;
+    this.opp_name=opp_name;
     this.gameStatus=gameStatus;
-    this.result=result;
+    this.result=gameResult;
 }
 
 
-//Match object definition and Prototyping//////////////////
+function buildGamesTable(games){
+    let table=$("<table></table>").html("<tr><th>Opponent</th><th>Game Status</th>");
+    games.forEach(function(game,index){
+        let gameRow=$(`<tr data-id"${game.id}" data-ind="${index}"><td>${game.opp_name}</td><td>${game.gameStatus}</td></tr>`);
+        table.append(gameRow);
+    });
+    $("#main-show").html("").append(table);
+    
+}
+
+
+//MATCH OBJECT DEFINITION AND PROTOTYPING//////////////////
 function Match(id,opp_name,act_games_ct){
     this.id=id;
     this.opp_name=opp_name;
