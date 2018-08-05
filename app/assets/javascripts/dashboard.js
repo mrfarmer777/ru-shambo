@@ -120,19 +120,21 @@ function Match(id,opp_name,act_games_ct){
     this.active_games_count=act_games_ct;
 }
 
-
-
+Match.prototype.genBadge=function(){
+        $("#match-row-"+this.id +" td").append("<span class='badge badge-pill badge-dark'>"+this.active_games_count+"</span>");
+};
 
 
 /////////////INDEX VIEW OF MATCHES/////////////////////////////
 function buildMatchTable(matchObjects){
-    $("#matchboard-body").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Active Games</th></tr></table>");
+    $("#matchboard-body").append("<table id='matches-table' class='table'><tr><th>Opponent</th></tr></table>");
     matchObjects.forEach(function(match,ind){
-        let matchRow= $(`<tr data-id="${match.id}" data-index="${ind}"></tr>`).html(`<td>${match.opp_name}</td><td>${match.active_games_count}</td>`);
+        let matchRow= $(`<tr id="match-row-${match.id}"data-id="${match.id}" data-index="${ind}"></tr>`).html(`<td>${match.opp_name}</td>`);
         matchRow.addClass("match-row");
         matchRow.on("click",selectMatch);
         //matchRow.data("id",`${match.id}`);
         $("#matches-table").append(matchRow);
+        match.genBadge();
     });
 }
 
@@ -185,7 +187,20 @@ function showMatch(match){
     $("form").submit(newGameWithThrow);
 }
 
-
+function showMatchFromJS(matchJS){
+    let template=Handlebars.compile($("#show-match-template-js").html())
+    let output=template(matchJS);
+    $("#main-show").html("");
+    $("#main-show").append(output);
+    
+    //Add handlers to the scrolling buttons
+    $("#show-next").on("click",showNext);
+    $("#show-prev").on("click",showPrev);
+    
+    
+    //Add handlers to the throw buttons for a new game
+    $("form").submit(newGameWithThrow);
+}
 ////////MAKING A NEW GAME BASED UPON THE THROW BUTTON CHOSEN
 function newGameWithThrow(e){
     e.preventDefault();
