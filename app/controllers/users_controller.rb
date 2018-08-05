@@ -56,8 +56,12 @@ class UsersController < ApplicationController
     
     def leaders
         @users=User.rank_by_win_percentage
-        render json: @users, only: [:name, :win_percentage]
-        
+        render json: @users
+    end
+    
+    def active_games
+        @user=User.find(params[:id])
+        render json: @user.active_games
     end
     
     

@@ -46,7 +46,7 @@ Match.prototype.report=function(){
 
 /////////////INDEX VIEW OF MATCHES/////////////////////////////
 function buildMatchTable(matchObjects){
-    $("#wip").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Start Date</th></tr></table>");
+    $("#matchboard-leader").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Start Date</th></tr></table>");
     matchObjects.forEach(function(match,ind){
         let matchRow= $(`<tr data-id="${match.id}" data-index="${ind}"></tr>`).html(`<td>${match.opp.name}</td><td>${match.startDate}</td>`);
         matchRow.addClass("match-row");
