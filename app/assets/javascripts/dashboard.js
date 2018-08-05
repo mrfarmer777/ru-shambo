@@ -1,59 +1,73 @@
 let user;
 let userMatches=[];
+let userActGames=[];
+let userCompGames=[];
 let showIndex=0;
 
 ///////DOCUMENT ON LOAD/////////////////////////
 $(function(){
-    //Initial call to retrieve user data
-    let userData=$.get(window.location.href+ "/data");
-    
-    //When it comes back
-    userData.done(function(resp){
+    //Initial call to retrieve all user data
+    $.get(window.location.href+ "/data").done(function(resp){
         user=resp;
         let matches=resp.matches;
         userMatches=matches.map(function(match){
-            let newMatch=new Match(match.id, match.opponent, match.created_at);
+            let newMatch=new Match(match.id, match.opponent_name, match.active_games_count);
             return newMatch;
         });
-        
         //Renders the index view using AJAX data
         buildMatchTable(userMatches);
+        
+        let games=resp.games
+        games.forEach(function(game){
+            let newGame= new Game(game.id, game.opp_name, game.status, game.result)
+        })
+        
+        
     });
     
     $("#show-next").on("click",showNext);
     $("#show-prev").on("click",showPrev);
     $("#leaderboard-header").on("click",renderLeaderboardData)
+    $("#matchboard-header").on("click",renderMatchboard);
     
     
 });
 
-
+/////GAME OBJECT DEFINITION AND PROTOTYPING////////////////
+function Game(id, opp, gameStatus, gameResult){
+    this.id=id;
+    this.opp=opp;
+    this.gameStatus=gameStatus;
+    this.result=result;
+}
 
 
 //Match object definition and Prototyping//////////////////
-function Match(id,opp,startDate){
+function Match(id,opp_name,act_games_ct){
     this.id=id;
-    this.opp=opp;
-    this.startDate=startDate;
+    this.opp_name=opp_name;
+    this.active_games_count=act_games_ct;
 }
 
-Match.prototype.report=function(){
-    let report=`You started playing against ${this.opp.name} on ${this.startDate}.`;
-    return report;
-};
+
 
 
 
 /////////////INDEX VIEW OF MATCHES/////////////////////////////
 function buildMatchTable(matchObjects){
-    $("#matchboard-body").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Start Date</th></tr></table>");
+    $("#matchboard-body").append("<table id='matches-table' class='table'><tr><th>Opponent</th><th>Active Games</th></tr></table>");
     matchObjects.forEach(function(match,ind){
-        let matchRow= $(`<tr data-id="${match.id}" data-index="${ind}"></tr>`).html(`<td>${match.opp.name}</td><td>${match.startDate}</td>`);
+        let matchRow= $(`<tr data-id="${match.id}" data-index="${ind}"></tr>`).html(`<td>${match.opp_name}</td><td>${match.active_games_count}</td>`);
         matchRow.addClass("match-row");
         matchRow.on("click",selectMatch);
         //matchRow.data("id",`${match.id}`);
         $("#matches-table").append(matchRow);
     });
+}
+
+
+function renderMatchboard(){
+    $.get(window.location.href+"/matches")
 }
     
 

@@ -62,6 +62,10 @@ class Match < ApplicationRecord
         self.games.count
     end
     
+    def active_games_count
+        self.games.select{|g| g.status.include?("Your Throw")}.count
+    end
+    
     def chal_wins
         self.games.select{|g| g.result.include?("Congratulations")}.count
     end

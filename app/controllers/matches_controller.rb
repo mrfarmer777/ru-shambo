@@ -16,6 +16,7 @@ class MatchesController < ApplicationController
     def index
         @user=User.find(params[:user_id])
         @matches=@user.matches
+        render json: @matches
     end
     
     #renders the new match form
@@ -66,7 +67,6 @@ class MatchesController < ApplicationController
     private
     
     def match_params
-        
         params.require(:match).permit(:challenger_id, :opponent_id)
     end
     
