@@ -22,6 +22,7 @@ $(function(){
     
     $("#show-next").on("click",showNext);
     $("#show-prev").on("click",showPrev);
+    $("#leaderboard-header").on("click",renderLeaderboardData)
     
     
 });
@@ -84,7 +85,6 @@ function getMatchData(id){
 }
 
 
-
 function showMatch(match){
     let oppName=match.opponent.name;
     let oppImage=match.opponent.image;
@@ -96,6 +96,19 @@ function showMatch(match){
     let stats=$("<div></div>").html(`Games: ${gameCount}`);
     $("#main-show").html("");
     $("#main-show").append(main).append(stats);
+}
+
+
+////////RENDERING THE LEADERBOARD//////////////////////
+
+function renderLeaderboardData(){
+    $.get("/leaders").done(function(resp){
+        
+        $("#leaderboard-table").html('<table id="leaderboard-table" class="table"><tr><th>Rank</th><th>Title</th><th>Name</th><th>Overall Record</th><th>Win Percentage</th></tr></table>');
+        resp.forEach(function(leader,index){
+            $("#leaderboard-table").append(`<tr><td>${index+1}</td><td></td><td>${leader.name}</td><td>${leader.record}</td><td>${leader.win_percentage}%</td></tr>`);
+        });
+    });
 }
    
 

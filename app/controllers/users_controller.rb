@@ -56,7 +56,8 @@ class UsersController < ApplicationController
     
     def leaders
         @users=User.rank_by_win_percentage
-        render json: @users, each_serializer: UserSerializer, scope: {'win_percentage': :win_percentage}
+        render json: @users, only: [:name, :win_percentage]
+        
     end
     
     
