@@ -20,7 +20,7 @@
         </div> 
         
         
-        <div id="show-wip" class="panel med-grey col-md-8">
+        <div id="show-wip" class="panel panel-left med-grey col-md-8">
             <div id="main-show"></div>
             
         </div>
@@ -31,20 +31,20 @@
 
 
 <div class="row row-eq-height">
-    <div id="leaderboard" class="panel col-md-6 med-grey">
+    <div id="leaderboard" class="panel panel-left col-md-6 med-grey">
         <h6><button id='leaderboard-header' class="btn btn-primary circle" data-toggle="collapse" data-target="#leaderboard-body">Leaderboard</button></h6>
         <div id="leaderboard-body" class="collapse">
             <table id="leaderboard-table"></table>
         </div>
     </div>
-    <div class="panel med-grey col-md-3">
+    <div class="panel panel-left med-grey col-md-3">
         <h6><button id='matchboard-header' class="btn btn-primary circle" data-toggle="collapse" data-target="#matchboard-body">My Matches</button></h6>
         <div id="matchboard-body" class="collapse">
         </div>
     </div>
     <div class="col-md-3 med-grey panel panel-left">
-        <h3>My Stats:</h3>
-        <div>
+        <h6><button id='leaderboard-header' class="btn btn-primary circle" data-toggle="collapse" data-target="#stats-body">My Stats</button></h6>
+        <div class="collapse" id="stats-body">
             <%if @user.games.count>0%>
                 <p><b>Record (All-time): </b><%=@user.record%></p>
                 <p><b>Win Percentage: </b><%=@user.win_percentage%></p>
