@@ -22,6 +22,7 @@ class UsersController < ApplicationController
             #if so, move along
             @user=User.find(params[:id].to_i)
             @match=Match.new
+            @game=Game.new
             @games=@user.games
         else
             #if not, back to root which will send you to your own show page

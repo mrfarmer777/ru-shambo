@@ -147,7 +147,7 @@ function showMatch(match){
     
     
     //Add handlers to the throw buttons for a new game
-    $(".throw-btn").on("click",newGameWithThrow)
+    $("form").submit(newGameWithThrow);
     /*
     let oppName=match.opponent.name;
     let oppImage=match.opponent.image;
@@ -164,7 +164,18 @@ function showMatch(match){
 
 
 ////////MAKING A NEW GAME BASED UPON THE THROW BUTTON CHOSEN
-
+function newGameWithThrow(e){
+    e.preventDefault();
+    
+    let values=$(this).serialize();
+    
+    
+    $.post("/games",values).done(function(resp){
+        //what do you want to do with the response?
+    });
+    
+    
+}
 
 ////////RENDERING THE LEADERBOARD//////////////////////
 

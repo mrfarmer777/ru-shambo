@@ -80,9 +80,11 @@
             <td>
                 <a id="new-game-btn" data-toggle="collapse" data-target="#throw-buttons" class="btn btn-success circle-sm">N</a><p class="circle-helper">New Game<p>
                 <div id="throw-buttons" class="collapse">
-                    <a id="throw-rock" data-throw="r" class="btn btn-primary circle-sm throw-btn">R</a>
-                    <a id="throw-paper" data-throw="p" class="btn btn-primary circle-sm throw-btn">P</a>
-                    <a id="throw-scissors" data-throw="s" class="btn btn-primary circle-sm throw-btn">S</a>
+                    <%=form_for "game"  do |f|%>
+                        <%=hidden_field("game", :chal_throw, {value: "r"})%>
+                        <%=hidden_field("game", :match_id, {value: "{{id}}" })%>
+                        <%=f.submit "R", class: "btn btn-primary circle-sm"%>
+                    <%end%>
                 </div>
             </td>
             <td>{{opponent.name}}</td></tr>
