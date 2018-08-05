@@ -85,6 +85,16 @@
                         <%=hidden_field("game", :match_id, {value: "{{id}}" })%>
                         <%=f.submit "R", class: "btn btn-primary circle-sm"%>
                     <%end%>
+                    <%=form_for "game"  do |f|%>
+                        <%=hidden_field("game", :chal_throw, {value: "p"})%>
+                        <%=hidden_field("game", :match_id, {value: "{{id}}" })%>
+                        <%=f.submit "P", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                    <%=form_for "game"  do |f|%>
+                        <%=hidden_field("game", :chal_throw, {value: "s"})%>
+                        <%=hidden_field("game", :match_id, {value: "{{id}}" })%>
+                        <%=f.submit "S", class: "btn btn-primary circle-sm"%>
+                    <%end%>
                 </div>
             </td>
             <td>{{opponent.name}}</td></tr>

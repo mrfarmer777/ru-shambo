@@ -1,4 +1,3 @@
-let user;
 let userMatches=[];
 let userActGames=[];
 let userCompGames=[];
@@ -8,7 +7,6 @@ let showIndex=0;
 $(function(){
     //Initial call to retrieve all user data
     $.get(window.location.href+ "/data").done(function(resp){
-        user=resp;
         let matches=resp.matches;
         userMatches=matches.map(function(match){
             let newMatch=new Match(match.id, match.opponent_name, match.active_games_count);
@@ -39,6 +37,43 @@ $(function(){
     
     
 });
+
+
+function updateUserData(){
+    $.get(window.location.href+ "/data").done(function(resp){
+        
+        //Create userMatches array of JS objects
+        let matches=resp.matches;
+        
+        //Global userMatches variable for use in rendering by other functions
+        userMatches=[];
+        userMatches=matches.map(function(match){
+            let newMatch=new Match(match.id, match.opponent_name, match.active_games_count);
+            return newMatch;
+        });
+        
+        
+        //Create userActGames array of JS objects
+        let games=resp.games;
+        userActGames=[];
+        userCompGames=[];
+        games.forEach(function(game){
+            
+            let newGame= new Game(game.id, game.opponent_name, game.status, game.result)
+            if(newGame.gameStatus==="Completed"){
+                //global userCompGames for use by other functions
+                userCompGames.push(newGame);
+            } else {
+                //global userActGames for use by other functions
+                userActGames.push(newGame);
+            }
+        })
+        
+        
+        buildMatchTable(userMatches);
+        buildGamesTable(userActGames);
+    });
+}
 
 /////GAME OBJECT DEFINITION AND PROTOTYPING////////////////
 function Game(id, opp_name, gameStatus, gameResult){
@@ -148,18 +183,6 @@ function showMatch(match){
     
     //Add handlers to the throw buttons for a new game
     $("form").submit(newGameWithThrow);
-    /*
-    let oppName=match.opponent.name;
-    let oppImage=match.opponent.image;
-    let userName=user.name;
-    let userImage=user.image;
-    let matchId=match.id;
-    let gameCount=match.games.length;
-    let main=$("<div></div>").html(`${userName} vs. ${oppName}`);
-    let stats=$("<div></div>").html(`Games: ${gameCount}`);
-    $("#main-show").html("");
-    $("#main-show").append(main).append(stats);
-    */
 }
 
 
@@ -171,8 +194,17 @@ function newGameWithThrow(e){
     
     
     $.post("/games",values).done(function(resp){
-        //what do you want to do with the response?
+        
+        updateUserData();
+        
     });
+    
+    
+    //Refresh the user data to show the new game
+    
+    
+    //re
+    
     
     
 }
