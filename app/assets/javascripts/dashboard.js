@@ -51,7 +51,8 @@ function Game(id, opp_name, gameStatus, gameResult){
 
 
 function buildGamesTable(games){
-    let table=$("<table></table>").html("<tr><th>Opponent</th><th>Game Status</th>");
+    let table=$("<table class='table' id='active-games-table'></table>").html("<tr><th>Opponent</th><th>Game Status</th>");
+   
     games.forEach(function(game,index){
         let gameRow=$(`<tr data-id"${game.id}" data-ind="${index}"><td>${game.opp_name}</td><td>${game.gameStatus}</td></tr>`);
         table.append(gameRow);
