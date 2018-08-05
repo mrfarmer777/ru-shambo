@@ -54,11 +54,23 @@ function buildGamesTable(games){
     let table=$("<table class='table' id='active-games-table'></table>").html("<tr><th>Opponent</th><th>Game Status</th>");
    
     games.forEach(function(game,index){
-        let gameRow=$(`<tr data-id"${game.id}" data-ind="${index}"><td>${game.opp_name}</td><td>${game.gameStatus}</td></tr>`);
+        let gameRow=$(`<tr class="game-row" data-id"${game.id}" data-ind="${index}"><td>${game.opp_name}</td><td>${game.gameStatus}</td></tr>`);
         table.append(gameRow);
     });
     $("#main-show").html("").append(table);
+    $(".game-row").on("click",getGame)
     
+}
+
+
+function getGame(e){
+    e.preventDefault();
+    //ToDo: Handle the scrolling function using showIndex
+    $.get("/games/"+this.dataset.id).done(showGame)
+}
+
+function showGame(game){
+    console.log(game);
 }
 
 
