@@ -34,6 +34,7 @@ $(function(){
     
     $("#leaderboard-header").on("click",renderLeaderboardData)
     $("#matchboard-header").on("click",renderMatchboard);
+    $("#active-games-button").on("click",updateUserData)
     
     
 });
@@ -119,6 +120,8 @@ function showGame(game){
     
     $("#show-next").on("click",showNextGame);
     $("#show-prev").on("click",showPrevGame);
+    
+    
 }
 
 function showNextGame(e){
@@ -146,20 +149,20 @@ function Match(id,opp_name,act_games_ct){
 }
 
 Match.prototype.genBadge=function(){
-        $("#match-row-"+this.id +" td").append("<span class='badge badge-pill badge-dark'>"+this.active_games_count+"</span>");
+    return "<span class='badge badge-pill badge-dark'>"+this.active_games_count+"</span>";
 };
 
 
 /////////////INDEX VIEW OF MATCHES/////////////////////////////
 function buildMatchTable(matchObjects){
+    $("#matchboard-body").empty();
     $("#matchboard-body").append("<table id='matches-table' class='table'><tr><th>Opponent</th></tr></table>");
     matchObjects.forEach(function(match,ind){
         let matchRow= $(`<tr id="match-row-${match.id}"data-id="${match.id}" data-index="${ind}"></tr>`).html(`<td>${match.opp_name}</td>`);
         matchRow.addClass("match-row");
         matchRow.on("click",selectMatch);
-        //matchRow.data("id",`${match.id}`);
+        matchRow.append(match.genBadge());
         $("#matches-table").append(matchRow);
-        match.genBadge();
     });
 }
 
