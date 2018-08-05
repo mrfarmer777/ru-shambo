@@ -1,33 +1,36 @@
-<div class="row">
-    <div class="med-grey panel">
-        <h2><%=@user.name%></h2>
-        <p>Ru-Rank: <%=@user.points_rank%> | Throw Master</p>
-        <div class="circle-group row">
-            <div>
-                <a href="<%=logout_path%>" class="btn btn-danger circle">L</a>
-                <p class="circle-helper">Logout</p>
+<div class="row row-eq-height">
+    
+        <div class="med-grey panel col-md-4">
+            <h2><%=@user.name%></h2>
+            <p>Ru-Rank: <%=@user.points_rank%> | Throw Master</p>
+            <div class="circle-group row">
+                <div>
+                    <a href="<%=logout_path%>" class="btn btn-danger circle">L</a>
+                    <p class="circle-helper">Logout</p>
+                </div>
+                <div>
+                    <a class="btn btn-primary circle"  data-toggle="collapse" href="#user_new_match_form">M</a>
+                    <p class="circle-helper">New Match</p>
+                </div>
+                <div>
+                    <a href="<%=new_game_path%>" class="btn btn-primary circle">N</a>
+                    <p class="circle-helper">New Game</p>
+                </div>
             </div>
-            <div>
-                <a class="btn btn-primary circle"  data-toggle="collapse" href="#user_new_match_form">M</a>
-                <p class="circle-helper">New Match</p>
-            </div>
-            <div>
-                <a href="<%=new_game_path%>" class="btn btn-primary circle">N</a>
-                <p class="circle-helper">New Game</p>
-            </div>
-        </div>
-    </div> 
-</div>
-
-<div class='row'>
-    <div id="show-wip" class="panel med-grey">
-        <div id="main-show"></div>
+        </div> 
         
-    </div>
+        
+        <div id="show-wip" class="panel med-grey col-md-8">
+            <div id="main-show"></div>
+            
+        </div>
+    
 </div>
 
 
-<div class="row">
+
+
+<div class="row row-eq-height">
     <div id="leaderboard" class="panel col-md-6 med-grey">
         <h6><button id='leaderboard-header' class="btn btn-primary circle" data-toggle="collapse" data-target="#leaderboard-body">Leaderboard</button></h6>
         <div id="leaderboard-body" class="collapse">

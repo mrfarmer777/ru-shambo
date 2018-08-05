@@ -100,16 +100,24 @@
 }
 
 /*PANEL STYLING*/
+
 .panel-left {
  text-align: left;
 }
 
 .panel {
  border-radius: 10px;
+ border-color: black;
  margin-top: 10px;
- padding: 5px 5px 5px 5px;
+ padding: 10px;
 }
 
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
 
 /*TABLES*/
 td, th {
