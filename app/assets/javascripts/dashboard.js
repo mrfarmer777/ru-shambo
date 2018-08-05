@@ -107,11 +107,34 @@ function getGame(e){
     
 }
 
+function getGameById(id){
+    $.get("/games/"+id).done(showGame);
+}
+
 function showGame(game){
     let template=Handlebars.compile($("#show-game-template").html());
     let output=template(game);
     $("#main-show").html("");
     $("#main-show").append(output);
+    
+    $("#show-next").on("click",showNextGame);
+    $("#show-prev").on("click",showPrevGame);
+}
+
+function showNextGame(e){
+    e.preventDefault();
+    if(showIndex<userActGames.length-1){
+        showIndex+=1;
+    }
+    getGameById(userActGames[showIndex].id);
+}
+
+function showPrevGame(e){
+    e.preventDefault();
+    if(showIndex>0){
+        showIndex-=1;
+    }
+    getGameById(userActGames[showIndex].id);
 }
 
 
@@ -189,20 +212,6 @@ function showMatch(match){
     $("form").submit(newGameWithThrow);
 }
 
-function showMatchFromJS(matchJS){
-    let template=Handlebars.compile($("#show-match-template-js").html())
-    let output=template(matchJS);
-    $("#main-show").html("");
-    $("#main-show").append(output);
-    
-    //Add handlers to the scrolling buttons
-    $("#show-next").on("click",showNext);
-    $("#show-prev").on("click",showPrev);
-    
-    
-    //Add handlers to the throw buttons for a new game
-    $("form").submit(newGameWithThrow);
-}
 ////////MAKING A NEW GAME BASED UPON THE THROW BUTTON CHOSEN
 function newGameWithThrow(e){
     e.preventDefault();
