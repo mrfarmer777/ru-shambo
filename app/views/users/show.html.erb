@@ -63,11 +63,34 @@
 
 
 <script id="show-game-template" type="text/x-handlebars-template">
-  <div id="game-deets">
-    <p>{{id}}</p>
-    <p>Challenger Throw: {{chal_throw}}</p>
-    <p>Status: {{status}}</p>
-  </div>
+  <div id="game-details">
+        <h3>Game Details: {{id}}</h3>
+        <table class="table">
+            <tr><td><img src="{{match.challenger.image}}" class="avatar"/></td><td></td><td><img src="{{match.opponent.image}}" class="avatar"/></td></tr>
+            <tr><td>{{match.challenger.name}}</td>
+            <td>
+                <div id="throw-buttons" class="collapse">
+                    <%=form_for "game"  do |f|%>
+                        <%=hidden_field("game", :chal_throw, {value: "r"})%>
+                        <%=f.submit "R", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                    <%=form_for "game"  do |f|%>
+                        <%=hidden_field("game", :chal_throw, {value: "p"})%>
+                        <%=f.submit "P", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                    <%=form_for "game"  do |f|%>
+                        <%=hidden_field("game", :chal_throw, {value: "s"})%>
+                        <%=f.submit "S", class: "btn btn-primary circle-sm"%>
+                    <%end%>
+                </div>
+            </td>
+            <td>{{match.opponent.name}}</td></tr>
+            <tr><td>Your Throw: {{chal_throw}}</td><td></td><td>Opponent Throw: ?</td></tr>
+        </table>
+        <a href="#" id="show-prev" class="btn btn-default circle-sm"><</a>
+        <a href="#" id="show-all" class="btn btn-default circle-sm">^</a>
+        <a href="#" id="show-next" class="btn btn-default circle-sm">></a>
+    </div>
 </script>
 
 
