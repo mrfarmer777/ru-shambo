@@ -19,8 +19,7 @@ class GamesController < ApplicationController
     
     def show
         @game=Game.find(params[:id].to_i)
-        @match=@game.match
-        @user=User.find(current_user)
+        render json: @game, status: 200
     end
     
     def update
