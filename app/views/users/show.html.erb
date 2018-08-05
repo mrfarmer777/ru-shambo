@@ -22,9 +22,7 @@
 <div class='row'>
     <div id="show-wip" class="panel med-grey">
         <div id="main-show"></div>
-        <a href="#" id="show-prev" class="btn btn-default circle-sm"><</a>
-        <a href="#" id="show-all" class="btn btn-default circle-sm">^</a>
-        <a href="#" id="show-next" class="btn btn-default circle-sm">></a>
+        
     </div>
 </div>
 
@@ -72,6 +70,20 @@
   </div>
 </script>
 
+
+<script id="show-match-template" type="text/x-handlebars-template">
+    <div id="match-details">
+        <h3>Match Details</h3>
+        <table class="table">
+            <tr><td><img src="{{challenger.image}}" class="avatar"/></td><td>vs</td><td><img src="{{opponent.image}}" class="avatar"/></td></tr>
+            <tr><td>{{challenger.name}}</td><td></td><td>{{opponent.name}}</td></tr>
+            <tr><td>Games Played: {{game_count}}</td><td>Record: {{record}}</td><td></td>
+        </table>
+        <a href="#" id="show-prev" class="btn btn-default circle-sm"><</a>
+        <a href="#" id="show-all" class="btn btn-default circle-sm">^</a>
+        <a href="#" id="show-next" class="btn btn-default circle-sm">></a>
+    </div>
+</script>
 
 
 

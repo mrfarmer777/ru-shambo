@@ -33,8 +33,7 @@ $(function(){
         
     });
     
-    $("#show-next").on("click",showNext);
-    $("#show-prev").on("click",showPrev);
+    
     $("#leaderboard-header").on("click",renderLeaderboardData)
     $("#matchboard-header").on("click",renderMatchboard);
     
@@ -137,6 +136,15 @@ function getMatchData(id){
 
 
 function showMatch(match){
+    let template=Handlebars.compile($("#show-match-template").html())
+    let output=template(match);
+    $("#main-show").html("")
+    $("#main-show").append(output);
+    $("#show-next").on("click",showNext);
+    $("#show-prev").on("click",showPrev);
+    
+    
+    /*
     let oppName=match.opponent.name;
     let oppImage=match.opponent.image;
     let userName=user.name;
@@ -147,6 +155,7 @@ function showMatch(match){
     let stats=$("<div></div>").html(`Games: ${gameCount}`);
     $("#main-show").html("");
     $("#main-show").append(main).append(stats);
+    */
 }
 
 
