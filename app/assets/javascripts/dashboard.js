@@ -15,16 +15,16 @@ $(function(){
         //Renders the index view using AJAX data
         buildMatchTable(userMatches);
         
-        let games=resp.games
+        let games=resp.games;
         games.forEach(function(game){
             
-            let newGame= new Game(game.id, game.opponent_name, game.status, game.result)
+            let newGame= new Game(game.id, game.opponent_name, game.status, game.result);
             if(newGame.gameStatus==="Completed"){
                 userCompGames.push(newGame);
             } else {
                 userActGames.push(newGame);
             }
-        })
+        });
         
         buildGamesTable(userActGames);
         
