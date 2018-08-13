@@ -9,13 +9,20 @@
                     <p class="circle-helper">Logout</p>
                 </div>
                 <div>
-                    <a class="btn btn-primary circle"  data-toggle="collapse" href="#user_new_match_form">N</a>
+                    <a class="btn btn-primary circle"  data-toggle="collapse" href="#user_new_match_form_cont">N</a>
                     <p class="circle-helper">New Match</p>
                 </div>
                 <div>
                     <a class="btn btn-primary circle" id="active-games-button">G</a>
                     <p class="circle-helper">Active Games</p>
                 </div>
+            </div>
+            <div id="user_new_match_form_cont" class="collapse">
+                <%=form_for :match, url: user_matches_path(@user) do |f|%>
+                    <%=hidden_field :match, :challenger_id, value: @user.id%>
+                    <%=collection_select(:match, :opponent_id, User.all, :id, :name)%>
+                    <%=f.submit%>
+                <%end%>
             </div>
         </div> 
         
