@@ -35,6 +35,8 @@ $(function(){
     $("#leaderboard-header").on("click",renderLeaderboardData)
     $("#matchboard-header").on("click",renderMatchboard);
     $("#active-games-button").on("click",updateUserData)
+    $("#sort-alpha").on("click",alphaSort);
+
     
     
 });
@@ -241,6 +243,27 @@ function newGameWithThrow(e){
 }
 
 ////////RENDERING THE LEADERBOARD//////////////////////
+
+
+
+
+function alphaSort(){
+    $.get("/leaders").done(function(resp){
+        $("#leaderboard-table").html('<tr><th>Rank</th><th>Title</th><th>Name</th><th>Overall Record</th><th>Win Percentage</th></tr>').addClass("table");
+        const sorted=resp.sort(function(a,b){
+            //Found reference to locale compare on MDN at: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+            return a.name.localeCompare(b.name);
+        });
+        
+        sorted.forEach(function(leader,index){
+            $("#leaderboard-table").append(`<tr><td>${index+1}</td><td></td><td>${leader.name}</td><td>${leader.record}</td><td>${leader.win_percentage}%</td></tr>`);
+        });
+    });
+}
+    
+
+
+
 
 function renderLeaderboardData(){
     $.get("/leaders").done(function(resp){
