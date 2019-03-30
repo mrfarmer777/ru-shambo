@@ -7,6 +7,7 @@
 default: &default
   adapter: postgresql
   database: rushambo_development
+  username: ubuntu
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
 
