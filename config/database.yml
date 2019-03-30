@@ -7,8 +7,7 @@
 default: &default
   adapter: postgresql
   database: rushambo_development
-  username: ubuntu
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
   timeout: 5000
 
 development:
@@ -24,4 +23,7 @@ test:
 
 production:
   <<: *default
+  adapter: postgresql
   database: rushambo_development
+  pool: 5
+  timeout: 5000
