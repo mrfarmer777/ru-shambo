@@ -58,7 +58,7 @@ group :development, :test do
   # Testing suite
   gem 'rspec-rails', '~> 3.7'
   
-  gem 'pg'
+
 
 end
 
