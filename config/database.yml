@@ -1,11 +1,12 @@
-# SQLite version 3.x
-#   gem install sqlite3
+# Postgresql
+#   gem install pg
 #
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+#   
+#   gem 'pg'
 #
 default: &default
   adapter: postgresql
+  encoding: unicode
   database: rushambo_development
   pool: 5
   timeout: 5000
@@ -24,6 +25,8 @@ test:
 production:
   <<: *default
   adapter: postgresql
+  username: farmer
+  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
   database: rushambo_development
   pool: 5
   timeout: 5000
