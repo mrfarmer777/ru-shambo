@@ -25,8 +25,8 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  username: farmer
-  password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
+  username: username
+  password: password
   database: rushambo_development
   pool: 5
   timeout: 5000
