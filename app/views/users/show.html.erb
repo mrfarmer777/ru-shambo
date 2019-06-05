@@ -82,7 +82,7 @@
             <tr><td><img src="{{match.challenger.image}}" class="avatar"/></td><td></td><td><img src="{{match.opponent.image}}" class="avatar"/></td></tr>
             <tr><td>{{match.challenger.name}}</td>
             <td>
-                <div id="throw-buttons" class="collapse">
+                <div id="throw-buttons" class="">
                     <%=form_for "game"  do |f|%>
                         <%=hidden_field("game", :chal_throw, {value: "r"})%>
                         <%=f.submit "R", class: "btn btn-primary circle-sm"%>
