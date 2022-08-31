@@ -44,7 +44,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 
 # Using omniauth foro authentication with Google strategy
-gem 'omniauth', '~> 1.8', '>= 1.8.1'
+gem 'omniauth', '~> 1.9'
 gem 'omniauth-google-oauth2', '~> 0.5.3'
 gem 'dotenv-rails'
 
